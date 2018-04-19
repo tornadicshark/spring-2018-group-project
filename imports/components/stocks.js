@@ -4,12 +4,35 @@ import template from './stocks.html';
  
 class StocksCtrl {
   constructor() {
-    this.tasks = [{
-      text: 'This is task 1'
+
+    this.stocks = [{
+      name: 'Bitcoin',
+      date: 'May 1, 2018',
+      price: '422.50'
     }, {
-      text: 'This is task 2'
+      name: 'Bitcoin1',
+      date: 'May 1, 2018',
+      price: '422.50'
     }, {
-      text: 'This is task 3'
+      name: 'Bitcoin2',
+      date: 'May 1, 2018',
+      price: '422.50'
+    }, {
+      name: 'Bitcoin3',
+      date: 'May 1, 2018',
+      price: '422.50'
+    }, {
+      name: 'Bitcoin5',
+      date: 'May 1, 2018',
+      price: '422.50'
+    }, {
+      name: 'Bitcoin6',
+      date: 'May 1, 2018',
+      price: '422.50'
+    }, {
+      name: 'Bitcoin7',
+      date: 'May 1, 2018',
+      price: '422.50'
     }];
   }
 }

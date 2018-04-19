@@ -8,8 +8,8 @@
     <a href="https://aws.amazon.com/lex/" title="Amazon Lex (product)" target="_new">Amazon Lex</a> into your web pages.  Try it out.
 </p>
 <div id="conversation" style="width: 400px; height: 400px; border: 1px solid #ccc; background-color: #eee; padding: 4px; overflow: scroll"></div>
-<form id="chatform" style="margin-top: 10px" onsubmit="return pushChat();">
-    <input type="text" id="wisdom" size="80" value="" placeholder="I want to buy Bitcoin">
+<form id="chatform" style="margin-top: 10px" ng-submit="return pushChat();">
+    <input type="text" ng-model="chatform.input" id="wisdom" size="80" value="" placeholder="I want to buy Bitcoin">
 </form>
 <!--
 <script type="text/javascript">

@@ -19,5 +19,6 @@ export default angular.module('FaqApp', [
 ])
   .component('faqApp', {
     templateUrl: 'imports/components/faq.html',
-    controller: FaqCtrl
+    controller: FaqCtrl,
+    stylesUrl: 'faq.less'
   });

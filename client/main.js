@@ -12,6 +12,7 @@ import stocksApp from '../imports/components/stocks';
 //import lexApp from '../imports/components/lex';
 
 // AUTHENTICATED USER TOOLS
+import { Meteor } from 'meteor/meteor';
 import dashboardApp from '../imports/components/dashboard';
 
 // CRYPTODASH MODULE SET UP

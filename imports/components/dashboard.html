@@ -5,3 +5,36 @@
       {{task.text}} 
     </li>
   </ul>
+
+  <h2><i class="fas fa-chart-line" aria-hidden="true"></i> Earnings Tracker</h2>
+  <p> It would be cool if we could show the users a chart of all their stocks and
+     where they bought them at OR if we could show just an overall tracking of their "break even" line
+     and then see where they either were doing good (green/profit) or were doing bad (red/losses).
+
+     <em> Just an idea !</em>
+  </p>
+
+  <div class="card-columns" id="dashboard">
+      <div class="card" ng-repeat="task in $ctrl.tasks">
+          <div class="card-body">
+            <h5 class="card-title">
+                {{task.text}} </h5>
+            
+                <img src="http://wallstcheatsheet.com/wp-content/uploads/2013/05/D3.png" alt="sample chart" width="100%">
+            <!-- TODO: only show buy button if the user is logged in -->
+            <button type="button" class="btn btn-danger">
+               <i class="far fa-credit-card" aria-hidden="true"></i> 
+               Sell
+            </button> 
+            <button type="button" class="btn btn-dark">
+              <i class="fas fa-angle-double-right" aria-hidden="true"></i>  
+             View History 
+            </button>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Bought on May 1 for $450.00</small>
+          </div>
+      </div>
+    </div>
+
+  
