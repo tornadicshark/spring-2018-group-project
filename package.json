@@ -1,0 +1,14 @@
+{
+  "name": "isdi-sp18-final-project",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.42",
+    "angular": "^1.6.9",
+    "angular-meteor": "^1.3.12",
+    "bcrypt": "^2.0.0",
+    "meteor-node-stubs": "^0.3.2"
+  }
+}
