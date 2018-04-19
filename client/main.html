@@ -9,7 +9,7 @@
 
 <body ng-app="cryptodash">
   <nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#/!">
           <img src="images/logo.png" height="30" class="d-inline-block align-top" alt="">
           <!--Cryptodash-->
         </a>
@@ -18,15 +18,22 @@
             <login-buttons></login-buttons> 
         </li>
         <li class="nav-item">
-           FAQ
+           <a href="#!faq">FAQ</a>
         </li>
       </ul>
     </nav>
 
     <div class="container-fluid">
       <div class="row">
-          <side-app class="col-md-2 d-none d-md-block"></side-app>
-          <dash-app class="col-md-9 ml-sm-auto col-lg-10 px-4"></dash-app>
+          <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <side-app></side-app>
+          </nav>
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <!-- routing area -->
+            <ng-view></ng-view>
+            <!--<dash-app></dash-app>
+            <stocks-app></stocks-app>-->
+          </main>
       </div>
     </div>
   
