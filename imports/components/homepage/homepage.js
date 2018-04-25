@@ -1,8 +1,12 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import template from './stocks.html';
+import template from './homepage.html';
 
-class StocksCtrl {
+
+// for specific currency support
+import currencyInfo from '../currencyInfo/currencyInfo';
+
+class HomeCtrl {
   constructor($scope) {
     $scope.viewModel(this);
 
@@ -44,18 +48,13 @@ class StocksCtrl {
       }
     })
   }
-
-  buyStock(name, value, owner) {
-    console.log("buy form button clicked");
-    console.log(name + ", " + value + ", " + owner);
-  }
-
 }
  
-export default angular.module('StocksApp', [
-  angularMeteor
+export default angular.module('HomeApp', [
+  angularMeteor,
+  currencyInfo.name
 ])
-  .component('stocksApp', {
-    templateUrl: 'imports/components/stocks/stocks.html',
-    controller: ['$scope', StocksCtrl]
+  .component('homeApp', {
+    templateUrl: 'imports/components/homepage/homepage.html',
+    controller: ['$scope', HomeCtrl]
   });

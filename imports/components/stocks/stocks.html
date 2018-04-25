@@ -11,21 +11,20 @@
         <!-- TODO: add d3 chart components -->
         <img src="https://leanpub.com/site_images/D3-Tips-and-Tricks/straightgraph2.png" width="100%" alt="sample chart">
         
-        <!-- TODO: only show buy button if the user is logged in -->
-        <form ng-hide="{{$ctrl.currentUser === null}}" id="buyStock" ng-submit="buyForm()">
-            <input type="hidden" ng-model="userStock.name" ng-value="{{stock.name}}"/>
-            <input type="hidden" ng-model="userStock.value" ng-value="{{stock.value}}"/>
-            <input type="hidden" ng-model="userStock.user" ng-value="{{$ctrl.currentUser._id}}"/>
-            <button type="submit" class="btn btn-success">
+        <!-- Only show buy button if the user is logged in -->
+            <button type="submit" class="btn btn-success" ng-hide="{{$ctrl.currentUser === null}}"
+            ng-click="$ctrl.buyStock(stock.name, stock.value, $ctrl.currentUser.username)">
               <i class="far fa-credit-card" aria-hidden="true"></i> 
               Buy
             </button>
-        </form>
 
-        <button type="button" class="btn btn-dark">
+        <!-- takes you to the faq page-->
+        <a href="#!faq" aria-label="Click for more information on cryptocurrency">
+          <button type="button" class="btn btn-dark" aria-label="Button is a link to more information on cryptocurrency">
           <i class="fas fa-angle-double-right" aria-hidden="true"></i>  
           More Info 
         </button>
+      </a>
       </div>
       <div class="card-footer">
         <small class="text-muted">Last updated on {{stock.date}}</small>

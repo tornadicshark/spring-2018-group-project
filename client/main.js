@@ -13,6 +13,7 @@ import stocksApp from '../imports/components/stocks/stocks';
 // AUTHENTICATED USER TOOLS
 import { Meteor } from 'meteor/meteor';
 import dashboardApp from '../imports/components/dashboard/dashboard';
+import homeApp from '../imports/components/homepage/homepage';
 
 // CRYPTODASH MODULE SET UP
 var app = angular.module('cryptodash', [
@@ -28,20 +29,21 @@ var app = angular.module('cryptodash', [
   //lexApp.name,
 
   // AUTHENTICATED USER IMPORTS
-  dashboardApp.name
+  dashboardApp.name,
+  homeApp.name
 ]);
 
 // CRYPTODASH MODULE ROUTING CONFIGURATION
 app.config(function($routeProvider) {
   $routeProvider
   .when("/", {
-    template: `<stocks-app></stocks-app>`
+    template: `<home-app></home-app>`
   })
   .when("/dashboard", {
     template: `<dash-app></dash-app>`
   })
   .when("/stocks", {
-    redirectTo: '/'
+    template: `<stocks-app></stocks-app>`
   }) 
   .when("/faq", {
     template: `<faq-app></faq-app>`

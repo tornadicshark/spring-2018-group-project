@@ -15,24 +15,29 @@
   </p>
 
   <div class="card-columns" id="dashboard">
-      <div class="card" ng-repeat="task in $ctrl.tasks">
+      <div class="card" ng-repeat="stock in $ctrl.userStocks">
           <div class="card-body">
-            <h5 class="card-title">
-                {{task.text}} </h5>
+            <h5 class="card-title"> {{stock.name}} </h5>
+            <em> Total Stock:  {{stock.amt}}</em>
+              <img src="http://wallstcheatsheet.com/wp-content/uploads/2013/05/D3.png" alt="sample chart" width="100%">
             
-                <img src="http://wallstcheatsheet.com/wp-content/uploads/2013/05/D3.png" alt="sample chart" width="100%">
-            <!-- TODO: only show buy button if the user is logged in -->
-            <button type="button" class="btn btn-danger">
+            
+            <!-- Only show buy button if the user is logged in -->
+            <button type="button" class="btn btn-danger" ng-hide="{{$ctrl.currentUser === null}}"
+            ng-click="$ctrl.sellStock(task.text, $ctrl.currentUser.username)">
                <i class="far fa-credit-card" aria-hidden="true"></i> 
                Sell
             </button> 
+
+            <!-- TODO -->
             <button type="button" class="btn btn-dark">
               <i class="fas fa-angle-double-right" aria-hidden="true"></i>  
              View History 
             </button>
+            
           </div>
           <div class="card-footer">
-            <small class="text-muted">Bought on May 1 for $450.00</small>
+            <small class="text-muted">Bought on {{stock.date}} for ${{stock.value}}</small>
           </div>
       </div>
     </div>
