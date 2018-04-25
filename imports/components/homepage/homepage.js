@@ -5,6 +5,7 @@ import template from './homepage.html';
 
 // for specific currency support
 import currencyInfo from '../currencyInfo/currencyInfo';
+import { Stocks } from '../../api/Stocks';
 
 class HomeCtrl {
   constructor($scope) {
@@ -16,6 +17,8 @@ class HomeCtrl {
         return Meteor.user();
       },
       stocks() {
+        return Stocks.find({});
+        /*
         return [{
           name: 'Bitcoin',
           date: 'May 1, 2018',
@@ -44,7 +47,7 @@ class HomeCtrl {
           name: 'Bitcoin7',
           date: 'May 1, 2018',
           value: '422.50'
-        }];
+        }];*/
       }
     })
   }

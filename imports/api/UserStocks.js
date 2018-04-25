@@ -1,19 +1,19 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-
+/*
 UserStocks = new Mongo.Collection('userStocks');
 
 UserStocks.schema = new SimpleSchema({
-    owner: {type: String, regEx: SimpleSchema.RegEx.Id, optional: false},
+    owner: {type: String, optional: false},
     name: {type: String, optional: false},
-    amt: {type: Number, defaultValue: 0, optional: false},
-    value: {type: Number, defaultValue: 0, optional: false},
+    amt: {type: String, defaultValue: 0, optional: false},
+    value: {type: String, defaultValue: 0, optional: false},
     date: {type: Date, optional: false},
   });
 
 UserStocks.attachSchema(UserStocks.schema);
-
-export const UserStocks;
+*/
+export const UserStocks = new Mongo.Collection('userStocks');
 
 /*
 if (Meteor.isServer) {

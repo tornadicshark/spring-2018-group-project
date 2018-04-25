@@ -2,6 +2,9 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import template from './stocks.html';
 
+import { Meteor } from 'meteor/meteor';
+import { Stocks } from '../../api/Stocks';
+
 class StocksCtrl {
   constructor($scope) {
     $scope.viewModel(this);
@@ -12,6 +15,8 @@ class StocksCtrl {
         return Meteor.user();
       },
       stocks() {
+        return Stocks.find({});
+        /*
         return [{
           name: 'Bitcoin',
           date: 'May 1, 2018',
@@ -40,7 +45,7 @@ class StocksCtrl {
           name: 'Bitcoin7',
           date: 'May 1, 2018',
           value: '422.50'
-        }];
+        }];*/
       }
     })
   }

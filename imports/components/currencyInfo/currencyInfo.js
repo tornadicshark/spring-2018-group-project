@@ -3,6 +3,8 @@ import angularMeteor from 'angular-meteor';
 import template from './currencyInfo.html';
 
 import { Meteor } from 'meteor/meteor';
+import { Stocks } from '../../api/Stocks';
+import { UserStocks } from '../../api/UserStocks';
 
 class CurrencyCtrl {
     constructor($scope) {
@@ -12,10 +14,17 @@ class CurrencyCtrl {
         this.helpers({
           currentUser() {
             return Meteor.user();
+          },
+          stocks() {
+            return Stocks.find({});
+          },
+          userStocks() {
+            //specify the type of coin an the user
+            return UserStocks.find({});
           }
         })
     }
-/*
+
   buyStock(name, value, owner) {
     console.log("buy stock button clicked");
     console.log(name + ", " + value + ", " + owner);
@@ -24,7 +33,7 @@ class CurrencyCtrl {
   sellStock(name, value, owner) {
     console.log("sell stock button clicked");
     console.log(name + ", " + value + ", " + owner);
-  }*/
+  }
   
 }
  
@@ -37,7 +46,8 @@ export default angular.module('CurrencyApp', [
 }).controller('numberSpinner', ['$scope', function($scope){
     var vm = this;
     
-    vm.testNumber = 10;  
+    vm.buyNumber = 1;  
+    vm.sellNumber = 0;  
 }])
 .directive('numericOnly', function(){
     return {

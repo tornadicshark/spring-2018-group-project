@@ -11,6 +11,33 @@
         <!-- TODO: add d3 chart components -->
         <img src="https://leanpub.com/site_images/D3-Tips-and-Tricks/straightgraph2.png" width="100%" alt="sample chart">
         
+        <table id="currencyInfoTbl">
+            <tr>
+                <th>Open</th>
+                <td>400</td>
+            </tr>
+            <tr>
+                <th>High</th>
+                <td>400</td>
+            </tr>
+            <tr>
+                <th>Low</th>
+                <td>222</td>
+            </tr>
+            <tr>
+                <th>Close</th>
+                <td>400</td>
+            </tr>
+            <tr>
+                <th>Volume</th>
+                <td>400</td>
+            </tr>
+            <tr>
+                <th>Market Cap</th>
+                <td>14000</td>
+            </tr>
+        </table>
+        
         <!-- Only show buy button if the user is logged in -->
             <button type="submit" class="btn btn-success" ng-hide="{{$ctrl.currentUser === null}}"
             ng-click="$ctrl.buyStock(stock.name, stock.value, $ctrl.currentUser.username)">

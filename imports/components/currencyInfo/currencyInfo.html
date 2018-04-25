@@ -30,29 +30,29 @@
             </tr>
         </table>
     </div>
-    <div class="col-md-8 col-12"> <!-- ng-click="$ctrl.buyStock(stock.name, stock.value, $ctrl.currentUser.username)" -->
+    <div class="col-md-8 col-12"> 
         <div class="row">
             <div class="card bg-light m-2">
+                <div style="padding: 16px;" data-ng-controller="numberSpinner as vm" ng-hide="{{$ctrl.currentUser === null}}">
+                        <number-spin data-ng-model="vm.buyNumber"></number-spin>
+                </div>
+                <!-- ng-click="$ctrl.buyStock(stock.name, stock.value, $ctrl.currentUser.username)" -->
                 <button type="submit" class="btn btn-success m-2" ng-disabled="{{$ctrl.currentUser === null}}">
                     <i class="far fa-credit-card" aria-hidden="true"></i> 
                     Buy
                 </button>
-
-                <div style="padding: 16px;" data-ng-controller="numberSpinner as vm" ng-hide="{{$ctrl.currentUser === null}}">
-                        <number-spin data-ng-model="vm.testNumber"></number-spin>
-                </div>
             </div>
 
             <div class="card bg-light m-2">
+                <div style="padding: 16px;" data-ng-controller="numberSpinner as vm" ng-hide="{{$ctrl.currentUser === null}}">
+                        <number-spin data-ng-model="vm.sellNumber"></number-spin>
+                </div>
                 <!-- ng-click="$ctrl.sellStock(task.text, $ctrl.currentUser.username)" -->
                 <button type="button" class="btn btn-danger m-2" ng-disabled="{{$ctrl.currentUser === null}}">
                     <i class="far fa-credit-card" aria-hidden="true"></i> 
                     Sell
                 </button> 
 
-                <div style="padding: 16px;" data-ng-controller="numberSpinner as vm" ng-hide="{{$ctrl.currentUser === null}}">
-                        <number-spin data-ng-model="vm.testNumber"></number-spin>
-                </div>
             </div>
         </div>
         
