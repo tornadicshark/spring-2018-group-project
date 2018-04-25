@@ -1,11 +1,4 @@
 
-  <h1>Test List from Dashboard</h1> 
-  <ul>
-    <li ng-repeat="task in $ctrl.tasks">
-      {{task.text}} 
-    </li>
-  </ul>
-
   <h2><i class="fas fa-chart-line" aria-hidden="true"></i> Earnings Tracker</h2>
   <p> It would be cool if we could show the users a chart of all their stocks and
      where they bought them at OR if we could show just an overall tracking of their "break even" line
@@ -23,11 +16,11 @@
             
             
             <!-- Only show buy button if the user is logged in -->
-            <button type="button" class="btn btn-danger" ng-hide="{{$ctrl.currentUser === null}}"
-            ng-click="$ctrl.sellStock(task.text, $ctrl.currentUser.username)">
-               <i class="far fa-credit-card" aria-hidden="true"></i> 
-               Sell
-            </button> 
+                <button type="button" class="btn btn-danger" ng-hide="{{$ctrl.currentUser === null}}"
+                  ng-click="$ctrl.sellStock(stock.name, stock.close)">
+                    <i class="far fa-credit-card" aria-hidden="true"></i> 
+                    Sell
+                  </button>
 
             <!-- TODO -->
             <button type="button" class="btn btn-dark">

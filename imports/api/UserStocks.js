@@ -20,48 +20,38 @@ if (Meteor.isServer) {
   // This code only runs on the server
   // Only publish tasks that are public or belong to the current user
   Meteor.publish('userStocks', function userStocksPublication() {
-    return UserStocks;
+    return UserStocks.find({
+      owner: this.userId
+    });
   });
 }
  
 Meteor.methods({
-  // old sell method
-  'userStocks.buy' (name, amt, value, userId) {
-
+  // old add method
+  'userStocks.buy' (name, value) {
     // Make sure the user is logged in before inserting a task
     if (!Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
  
-    userStocks.insert({
+    UserStocks.insert({
       owner: Meteor.userId(),
       name: name,
-      amt: amt,
+      amt: '1',
       value: value,
       date: new Date()
     });
   },
   // old remove method
-  'userStocks.sell' (taskId) {
-    check(taskId, String);
+  'userStocks.sell' (stock, value) {
 	  
-    const task = Tasks.findOne(taskId);
-    if (task.private && task.owner !== Meteor.userId()) {
-      // If the task is private, make sure only the owner can delete it
-      throw new Meteor.Error('not-authorized');
-    } 
-	
-	  if (task.owner !== Meteor.userId()){
+    const userStock = UserStocks.findOne(stock);
+
+	  if (stock.owner !== Meteor.userId()){
       // If the task is not the user's they cannot delete it
       throw new Meteor.Error('not-authorized');
     } 
-	  
-	  if (task.priority) {
-		  alert("Please remove priority from this task before trying to delete");
-      throw new Meteor.Error('prioritzed-task');
-	  }
-	  
-	 Tasks.remove(taskId);
+	 UserStocks.remove(stock);
   },
   // could be used for buy more 
   /*

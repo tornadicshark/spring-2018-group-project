@@ -2,10 +2,13 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import template from './stocks.html';
 
+import ngAnimate from 'angular-animate';
+
 import { Meteor } from 'meteor/meteor';
 import { Stocks } from '../../api/Stocks';
 
 class StocksCtrl {
+
   constructor($scope) {
     $scope.viewModel(this);
 
@@ -50,17 +53,19 @@ class StocksCtrl {
     })
   }
 
-  buyStock(name, value, owner) {
-    console.log("buy form button clicked");
-    console.log(name + ", " + value + ", " + owner);
+  buyStock(name, value) {
+    console.log(name + value);
+    //Meteor.call('userStocks.buy', name, value);
+    alert("Success! You have bought one " + name + "!");
   }
 
 }
  
 export default angular.module('StocksApp', [
-  angularMeteor
+  angularMeteor,
+  ngAnimate
 ])
-  .component('stocksApp', {
-    templateUrl: 'imports/components/stocks/stocks.html',
-    controller: ['$scope', StocksCtrl]
-  });
+.component('stocksApp', {
+  templateUrl: 'imports/components/stocks/stocks.html',
+  controller: ['$scope', StocksCtrl]
+});

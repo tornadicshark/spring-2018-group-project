@@ -7,76 +7,56 @@
       <div class="card-body">
         <h5 class="card-title">
             {{stock.name}} </h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{stock.value}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{stock.close}}</h6>
         <!-- TODO: add d3 chart components -->
         <img src="https://leanpub.com/site_images/D3-Tips-and-Tricks/straightgraph2.png" width="100%" alt="sample chart">
         
-        <table id="currencyInfoTbl">
-            <tr>
-                <th>Open</th>
-                <td>400</td>
-            </tr>
-            <tr>
-                <th>High</th>
-                <td>400</td>
-            </tr>
-            <tr>
-                <th>Low</th>
-                <td>222</td>
-            </tr>
-            <tr>
-                <th>Close</th>
-                <td>400</td>
-            </tr>
-            <tr>
-                <th>Volume</th>
-                <td>400</td>
-            </tr>
-            <tr>
-                <th>Market Cap</th>
-                <td>14000</td>
-            </tr>
-        </table>
-        
+      
         <!-- Only show buy button if the user is logged in -->
-            <button type="submit" class="btn btn-success" ng-hide="{{$ctrl.currentUser === null}}"
-            ng-click="$ctrl.buyStock(stock.name, stock.value, $ctrl.currentUser.username)">
-              <i class="far fa-credit-card" aria-hidden="true"></i> 
-              Buy
-            </button>
+              <button type="submit" class="btn btn-success" ng-hide="{{$ctrl.currentUser === null}}"
+              ng-click="$ctrl.buyStock(stock.name, stock.close)">
+                <i class="far fa-credit-card" aria-hidden="true"></i> 
+                Buy
+              </button>
+              <p> {{$ctrl.successMsg}}</p>
 
-        <!-- takes you to the faq page-->
-        <a href="#!faq" aria-label="Click for more information on cryptocurrency">
-          <button type="button" class="btn btn-dark" aria-label="Button is a link to more information on cryptocurrency">
+        <!-- drop down more info -->
+        <span>
+        <button type="button" class="btn btn-sm btn-dark" ng-click="row.booleanVal =row.booleanVal?false:true">
           <i class="fas fa-angle-double-right" aria-hidden="true"></i>  
-          More Info 
-        </button>
-      </a>
+          More Info</button>
+          <div class="check-element animate-show my-2" ng-show="row.booleanVal">
+            <table id="currencyInfoTbl">
+                <tr>
+                    <th>Open</th>
+                    <td>{{stock.open}}</td>
+                </tr>
+                <tr>
+                    <th>High</th>
+                    <td>{{stock.high}}</td>
+                </tr>
+                <tr>
+                    <th>Low</th>
+                    <td>{{stock.low}}</td>
+                </tr>
+                <tr>
+                    <th>Close</th>
+                    <td>{{stock.close}}</td>
+                </tr>
+                <tr>
+                    <th>Volume</th>
+                    <td>{{stock.volume}}</td>
+                </tr>
+                <tr>
+                    <th>Market Cap</th>
+                    <td>{{stock.marketCap}}</td>
+                </tr>
+            </table>      
+          </div>
+      </span>
       </div>
       <div class="card-footer">
         <small class="text-muted">Last updated on {{stock.date}}</small>
       </div>
   </div>
 </div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>

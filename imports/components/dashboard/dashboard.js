@@ -4,7 +4,8 @@ import template from './dashboard.html';
 
 // added for functionality
 import { Meteor } from 'meteor/meteor';
-//import { UserStocks } from '../../api/UserStocks.js';
+import { UserStocks } from '../../api/UserStocks.js';
+import { Stocks } from '../../api/Stocks.js';
  
 class DashboardCtrl {
   constructor($scope) {
@@ -13,40 +14,22 @@ class DashboardCtrl {
     this.helpers({
       currentUser() {
         return Meteor.user();
-      }/*,
-      userStocks() {
-        // Show newest tasks at the top
-        return UserStocks.find({}, {
-          sort: {
-            value: -1
-          }
-        });
-      }*/
-      , tasks() {
-        return [{
-          text: 'This is task 1'
-        }, {
-          text: 'This is task 2'
-        }, {
-          text: 'This is task 3'
-        }];
+      },
+      stocks() {
+        return Stocks.find({});
       },
       userStocks() {
-        return [{
-         name: 'Bitcoin',
-         amt: '452',
-         value: '9,000',
-         owner: 'user',
-         date: new Date() 
-        }]
+        return UserStocks.find({});
       }
-  	})
+    })
   }
 
-  sellStock(name, owner) { 
-    console.log("Selling stock now..." + name + owner)
+  sellStock(name, value) { 
+    console.log("Selling stock now..." + name)
+
+    alert("Success! You have sold one " + name + "!");
     // Insert a task into the collection
-    //Meteor.call('userStocks.insert', stock);
+    //Meteor.call('userStocks.insert', name, value, owner);
   }
 }
  
