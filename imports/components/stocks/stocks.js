@@ -41,6 +41,6 @@ export default angular.module('StocksApp', [
   angularMeteor
 ])
   .component('stocksApp', {
-    templateUrl: 'imports/components/stocks.html',
+    templateUrl: 'imports/components/stocks/stocks.html',
     controller: StocksCtrl
   });

@@ -6,14 +6,13 @@ import ngRoute from 'angular-route'; // routing import
 import '../imports/startup/accounts-config.js'; // user account import
 
 // SITEWIDE TOOLS
-import sidebarApp from '../imports/components/sidebar';
-import faqApp from '../imports/components/faq';
-import stocksApp from '../imports/components/stocks';
-//import lexApp from '../imports/components/lex';
+import sidebarApp from '../imports/components/sidebar/sidebar';
+import faqApp from '../imports/components/faq/faq';
+import stocksApp from '../imports/components/stocks/stocks';
 
 // AUTHENTICATED USER TOOLS
 import { Meteor } from 'meteor/meteor';
-import dashboardApp from '../imports/components/dashboard';
+import dashboardApp from '../imports/components/dashboard/dashboard';
 
 // CRYPTODASH MODULE SET UP
 var app = angular.module('cryptodash', [
@@ -43,12 +42,12 @@ app.config(function($routeProvider) {
   })
   .when("/stocks", {
     redirectTo: '/'
-  }) /*
-  .when("/lex", {
-    template: `<lex-app></lex-app>`
-  }) */
+  }) 
   .when("/faq", {
     template: `<faq-app></faq-app>`
+  })
+  .when("/help", {
+    template: `<div ng-include="'lexbot.html'"></div>`
   })
   .when("/error", {
     template: `404. That page is not found.`

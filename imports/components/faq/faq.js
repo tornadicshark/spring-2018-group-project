@@ -18,7 +18,7 @@ export default angular.module('FaqApp', [
   angularMeteor
 ])
   .component('faqApp', {
-    templateUrl: 'imports/components/faq.html',
+    templateUrl: 'imports/components/faq/faq.html',
     controller: FaqCtrl,
     stylesUrl: 'faq.less'
   });

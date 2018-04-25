@@ -1,8 +1,8 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import template from './dashboard.html';
+import template from './sidebar.html';
  
-class DashboardCtrl {
+class SidebarCtrl {
   constructor() {
     this.tasks = [{
       text: 'This is task 1'
@@ -14,10 +14,10 @@ class DashboardCtrl {
   }
 }
  
-export default angular.module('DashboardApp', [
+export default angular.module('SidebarApp', [
   angularMeteor
 ])
-  .component('dashApp', {
-    templateUrl: 'imports/components/dashboard.html',
-    controller: DashboardCtrl
+  .component('sideApp', {
+    templateUrl: 'imports/components/sidebar/sidebar.html',
+    controller: SidebarCtrl
   });
