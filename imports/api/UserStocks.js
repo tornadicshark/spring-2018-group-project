@@ -1,5 +1,19 @@
+/** 
+ * UserStocks Collection:
+ * 
+ * owner    the username of the person who bought the stock
+ * stock    name of the stock
+ * amt      the amount of shares bought
+ * 
+ * Value of the amt will be determined by the current price of stock
+*/
+
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
+
+export const UserStocks = new Mongo.Collection('userStocks');
+
+
 /*
 UserStocks = new Mongo.Collection('userStocks');
 
@@ -13,8 +27,6 @@ UserStocks.schema = new SimpleSchema({
 
 UserStocks.attachSchema(UserStocks.schema);
 */
-export const UserStocks = new Mongo.Collection('userStocks');
-
 /*
 if (Meteor.isServer) {
   // This code only runs on the server
