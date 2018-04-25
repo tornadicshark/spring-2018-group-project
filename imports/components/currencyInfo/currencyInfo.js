@@ -15,6 +15,17 @@ class CurrencyCtrl {
           }
         })
     }
+
+  buyStock(name, value, owner) {
+    console.log("buy stock button clicked");
+    console.log(name + ", " + value + ", " + owner);
+  }
+
+  sellStock(name, value, owner) {
+    console.log("sell stock button clicked");
+    console.log(name + ", " + value + ", " + owner);
+  }
+  
 }
  
 export default angular.module('CurrencyApp', [

@@ -1,22 +1,50 @@
 <h1> Title </h1>
 <img src="http://wallstcheatsheet.com/wp-content/uploads/2013/05/D3.png" alt="sample chart" width="100%">
      
+<div class="row my-5">
+    <div class="col-md-4 col-12">
+        <table id="currencyInfoTbl">
+            <tr>
+                <th>Open</th>
+                <td>400</td>
+            </tr>
+            <tr>
+                <th>High</th>
+                <td>400</td>
+            </tr>
+            <tr>
+                <th>Low</th>
+                <td>222</td>
+            </tr>
+            <tr>
+                <th>Close</th>
+                <td>400</td>
+            </tr>
+            <tr>
+                <th>Volume</th>
+                <td>400</td>
+            </tr>
+            <tr>
+                <th>Market Cap</th>
+                <td>14000</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-8 col-12"> <!-- ng-click="$ctrl.buyStock(stock.name, stock.value, $ctrl.currentUser.username)" -->
+        <button type="submit" class="btn btn-success mx-2" ng-disabled="{{$ctrl.currentUser === null}}">
+            <i class="far fa-credit-card" aria-hidden="true"></i> 
+            Buy
+        </button>
 
-<div class="row col-md-6 col-12 text-right">
-    <!-- ng-click="$ctrl.buyStock(stock.name, stock.value, $ctrl.currentUser.username)" -->
-    <button type="submit" class="btn btn-success mx-2" ng-disabled="{{$ctrl.currentUser === null}}">
-    <i class="far fa-credit-card" aria-hidden="true"></i> 
-    Buy
-    </button>
+        <!-- ng-click="$ctrl.sellStock(task.text, $ctrl.currentUser.username)" -->
+        <button type="button" class="btn btn-danger mx-2" ng-disabled="{{$ctrl.currentUser === null}}">
+            <i class="far fa-credit-card" aria-hidden="true"></i> 
+            Sell
+        </button> 
 
-    <!-- ng-click="$ctrl.sellStock(task.text, $ctrl.currentUser.username)" -->
-    <button type="button" class="btn btn-danger mx-2" ng-disabled="{{$ctrl.currentUser === null}}">
-    <i class="far fa-credit-card" aria-hidden="true"></i> 
-    Sell
-    </button> 
-
-    <!-- SHOW IF NO USER IS LOGGED IN -->
-    <p ng-show="{{$ctrl.currentUser === null}}"><strong> Please log in to buy or sell shares.</strong></p>
+        <!-- SHOW IF NO USER IS LOGGED IN -->
+        <p ng-show="{{$ctrl.currentUser === null}}"><strong> Please log in to buy or sell shares.</strong></p>            
+    </div>
 </div>
 
 
