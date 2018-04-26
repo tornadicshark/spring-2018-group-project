@@ -13,15 +13,15 @@
         -->
       
         <!-- Only show buy button if the user is logged in -->
-              <button type="submit" class="btn btn-success" ng-hide="{{$ctrl.currentUser === null}}"
+              <button type="submit" class="btn btn-success btn-sm m-2" ng-hide="{{$ctrl.currentUser === null}}"
               ng-click="$ctrl.buyStock(stock.name, 1, stock.close, stock.date)">
                 <i class="far fa-credit-card" aria-hidden="true"></i> 
-                Buy
+                Buy 1 Share
               </button>
               
         <!-- drop down more info -->
         <span>
-        <button type="button" class="btn btn-sm btn-dark" ng-click="row.booleanVal =row.booleanVal?false:true">
+        <button type="button" class="btn btn-sm btn-dark m-2" ng-click="row.booleanVal =row.booleanVal?false:true">
           <i class="fas fa-angle-double-right" aria-hidden="true"></i>  
           More Info</button>
           <div class="check-element animate-show my-2" ng-show="row.booleanVal">
