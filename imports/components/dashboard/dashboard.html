@@ -21,7 +21,7 @@ Please login to see your dashboard.
             
             <!-- Only show buy button if the user is logged in -->
                 <button type="button" class="btn btn-danger" ng-hide="{{$ctrl.currentUser === null}}"
-                  ng-click="$ctrl.sellStock(stock.stock)">
+                  ng-click="$ctrl.sellStock(stock.stock, 1)">
                     <i class="far fa-credit-card" aria-hidden="true"></i> 
                     Sell
                   </button>

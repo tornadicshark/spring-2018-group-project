@@ -39,6 +39,9 @@ var app = angular.module('cryptodash', [
 app.config(function($routeProvider) {
   $routeProvider
   .when("/", {
+    redirectTo: '/stocks'
+  })
+  .when("/homepage", {
     template: `<home-app></home-app>`
   })
   .when("/dashboard", {

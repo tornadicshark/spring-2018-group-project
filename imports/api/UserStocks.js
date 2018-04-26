@@ -19,50 +19,54 @@ if (Meteor.isServer) {
   // Only publish tasks that are public or belong to the current user
   Meteor.publish('userStocks', function getUserStocks() {
     return UserStocks.find({
-        ownerID: this.userId
+        ownerID: { $eq: this.userId }
       });
   });
 }
 
 Meteor.methods({
-  'userStocks.buy' (stock, amt) {
+  'userStocks.buy' (stock, amount) {
     // Make sure the user is logged in before inserting a task
     if (!Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
 
-/*
-    existingStock = UserStocks.findOne({
-      ownerID: this.userId,
-      stock: stock
-    });
-    console.log("found existing stock");
-    console.log(existingStock.amt + ", " + existingStock.stock);
-    
-    if (exisitingStock) {
-      UserStocks.update(ownerID, {
-        $set: {
-          checked: setChecked
-        }
-      });
-    }*/
-
-    UserStocks.insert({
-      ownerID: Meteor.userId(),
-      stock: stock,
-      amt: amt
-    });
+    // if currently exists, increase the amount by the amount purchased
+    // if it does not exit, the upsert true will create/insert
+    UserStocks.update(
+      { ownerID: { $eq: this.userId }, stock: { $eq: stock } },
+      { $setOnInsert: { ownerID: this.userId, stock: stock}, $inc: {amt: amount} },
+      { upsert: true, returnNewDocument: true}
+    );
   },
-  'userStocks.sell' (stock, amt) {
+  'userStocks.sell' (stock, amount) {
     // Make sure the user is logged in before inserting a task
     if (!Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
 
-    UserStocks.insert({
-      ownerID: Meteor.userId(),
-      stock: stock,
-      amt: amt
+    var currentStock = UserStocks.findOne({
+      ownerID: { $eq: this.userId },
+      stock: { $eq: stock }
     });
+
+    var oldAmount = Number(currentStock.amt);
+    
+    var newAmount = (Number(oldAmount) - Number(amount));
+
+    if (newAmount > 0) {
+      UserStocks.update(
+        { ownerID: { $eq: this.userId }, stock: { $eq: stock } },
+        { $setOnInsert: { ownerID: this.userId, stock: stock}, $set: {amt: newAmount} },
+        { upsert: true, returnNewDocument: true}
+      );
+    } else if (newAmount >= 0) {
+      UserStocks.remove(
+        { ownerID: { $eq: this.userId }, stock: { $eq: stock } }
+      );
+    } else {
+      throw new Meteor.Error('not-enough-stock');
+    }
+
   },
 });

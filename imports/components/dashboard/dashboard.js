@@ -32,21 +32,16 @@ class DashboardCtrl {
     })
   }
 
-  buyStock(newTask) {
-    // Insert a task into the collection
-    //Meteor.call('tasks.insert', newTask);
- 
-    // Clear form
-    this.newTask = '';
-  }
+  sellStock(stock, amt) {
+    console.log("Selling stock processing...");
+    // add to the user's stock
+    Meteor.call('userStocks.sell', stock, amt);
 
-
-  sellStock(newTask) {
-    // Insert a task into the collection
-    //Meteor.call('tasks.insert', newTask);
- 
-    // Clear form
-    this.newTask = '';
+    // add to the history
+    const type = "Sell";
+    const price = getPrice(stock);
+    const date = new Date();
+    Meteor.call('userHistory.add', stock, amt, price, date, type);
   }
 }
  
@@ -57,3 +52,12 @@ export default angular.module('DashboardApp', [
     templateUrl: 'imports/components/dashboard/dashboard.html',
     controller: ['$scope', DashboardCtrl]
   });
+
+
+  function getPrice(stockName) {
+    stock = Stocks.findOne({
+      name: { $eq: stockName }
+    });
+
+    return stock.close;
+  }

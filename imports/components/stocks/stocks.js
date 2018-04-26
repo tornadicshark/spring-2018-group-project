@@ -46,7 +46,7 @@ class StocksCtrl {
     // add to the user's stock
     Meteor.call('userStocks.buy', stock, amt);
     // add to the history
-    const type = "bought";
+    const type = "Buy";
     Meteor.call('userHistory.add', stock, amt, price, date, type);
   }
 

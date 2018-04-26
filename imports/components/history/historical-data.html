@@ -13,7 +13,7 @@
           <th>Price</th>
         </thead>
         <tr ng-repeat="history in $ctrl.userHistory"> 
-          <td>{{history.date | date:'MM/dd/yyyy'}}</td>
+          <td>{{history.date | date:'MM/dd/yyyy hh:mm a'}}</td>
           <td>{{history.transactionType}}</td>
           <td>{{history.stockType}}</td>
           <td>{{history.amt}}</td>
