@@ -8,18 +8,17 @@
         <h5 class="card-title">
             {{stock.name}} </h5>
         <h6 class="card-subtitle mb-2 text-muted">{{stock.close}}</h6>
-        <!-- TODO: add d3 chart components -->
+        <!-- TODO: add d3 chart components 
         <img src="https://leanpub.com/site_images/D3-Tips-and-Tricks/straightgraph2.png" width="100%" alt="sample chart">
-        
+        -->
       
         <!-- Only show buy button if the user is logged in -->
               <button type="submit" class="btn btn-success" ng-hide="{{$ctrl.currentUser === null}}"
-              ng-click="$ctrl.buyStock(stock.name, stock.close)">
+              ng-click="$ctrl.buyStock(stock.name, 1, stock.close, stock.date)">
                 <i class="far fa-credit-card" aria-hidden="true"></i> 
                 Buy
               </button>
-              <p> {{$ctrl.successMsg}}</p>
-
+              
         <!-- drop down more info -->
         <span>
         <button type="button" class="btn btn-sm btn-dark" ng-click="row.booleanVal =row.booleanVal?false:true">
@@ -56,7 +55,7 @@
       </span>
       </div>
       <div class="card-footer">
-        <small class="text-muted">Last updated on {{stock.date}}</small>
+        <small class="text-muted">Last updated on {{stock.date | date:'MM/dd/yyyy'}}</small>
       </div>
   </div>
 </div>

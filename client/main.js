@@ -14,6 +14,7 @@ import stocksApp from '../imports/components/stocks/stocks';
 import { Meteor } from 'meteor/meteor';
 import dashboardApp from '../imports/components/dashboard/dashboard';
 import homeApp from '../imports/components/homepage/homepage';
+import historicalApp from '../imports/components/history/historical-data';
 
 // CRYPTODASH MODULE SET UP
 var app = angular.module('cryptodash', [
@@ -30,7 +31,8 @@ var app = angular.module('cryptodash', [
 
   // AUTHENTICATED USER IMPORTS
   dashboardApp.name,
-  homeApp.name
+  homeApp.name,
+  historicalApp.name
 ]);
 
 // CRYPTODASH MODULE ROUTING CONFIGURATION
@@ -42,15 +44,18 @@ app.config(function($routeProvider) {
   .when("/dashboard", {
     template: `<dash-app></dash-app>`
   })
+  .when("/history", {
+    template: `<historical-app></historical-app>`
+  })
   .when("/stocks", {
     template: `<stocks-app></stocks-app>`
   }) 
   .when("/faq", {
     template: `<faq-app></faq-app>`
-  })
+  })/*
   .when("/help", {
     template: `<div ng-include="'lexbot.html'"></div>`
-  })
+  })*/
   .when("/error", {
     template: `404. That page is not found.`
   })

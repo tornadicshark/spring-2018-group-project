@@ -1,7 +1,7 @@
 /** 
  * UserStocks Collection:
  * 
- * owner    the username of the person who bought the stock
+ * ownerID  the username of the person who bought the stock
  * stock    name of the stock
  * amt      the amount of shares bought
  * 
@@ -14,74 +14,55 @@ import { Mongo } from 'meteor/mongo';
 export const UserStocks = new Mongo.Collection('userStocks');
 
 
-/*
-UserStocks = new Mongo.Collection('userStocks');
-
-UserStocks.schema = new SimpleSchema({
-    owner: {type: String, optional: false},
-    name: {type: String, optional: false},
-    amt: {type: String, defaultValue: 0, optional: false},
-    value: {type: String, defaultValue: 0, optional: false},
-    date: {type: Date, optional: false},
-  });
-
-UserStocks.attachSchema(UserStocks.schema);
-*/
-/*
 if (Meteor.isServer) {
   // This code only runs on the server
   // Only publish tasks that are public or belong to the current user
-  Meteor.publish('userStocks', function userStocksPublication() {
+  Meteor.publish('userStocks', function getUserStocks() {
     return UserStocks.find({
-      owner: this.userId
-    });
+        ownerID: this.userId
+      });
   });
 }
- 
+
 Meteor.methods({
-  // old add method
-  'userStocks.buy' (name, value) {
+  'userStocks.buy' (stock, amt) {
     // Make sure the user is logged in before inserting a task
     if (!Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
- 
+
+/*
+    existingStock = UserStocks.findOne({
+      ownerID: this.userId,
+      stock: stock
+    });
+    console.log("found existing stock");
+    console.log(existingStock.amt + ", " + existingStock.stock);
+    
+    if (exisitingStock) {
+      UserStocks.update(ownerID, {
+        $set: {
+          checked: setChecked
+        }
+      });
+    }*/
+
     UserStocks.insert({
-      owner: Meteor.userId(),
-      name: name,
-      amt: '1',
-      value: value,
-      date: new Date()
+      ownerID: Meteor.userId(),
+      stock: stock,
+      amt: amt
     });
   },
-  // old remove method
-  'userStocks.sell' (stock, value) {
-	  
-    const userStock = UserStocks.findOne(stock);
-
-	  if (stock.owner !== Meteor.userId()){
-      // If the task is not the user's they cannot delete it
-      throw new Meteor.Error('not-authorized');
-    } 
-	 UserStocks.remove(stock);
-  },
-  // could be used for buy more 
-  /*
-  'tasks.setPriority' (taskId, setAsPriority) {
-    check(taskId, String);
-    check(setAsPriority, Boolean);
- 
-    const task = Tasks.findOne(taskId);
- 
-    // Make sure only the task owner can make a task as a priority
-    if (task.owner !== Meteor.userId()) {
+  'userStocks.sell' (stock, amt) {
+    // Make sure the user is logged in before inserting a task
+    if (!Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
- 
-    Tasks.update(taskId, {
-      $set: {
-        priority: setAsPriority
-      }
+
+    UserStocks.insert({
+      ownerID: Meteor.userId(),
+      stock: stock,
+      amt: amt
     });
   },
-});*/
+});

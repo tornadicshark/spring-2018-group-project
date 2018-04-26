@@ -6,10 +6,15 @@ import template from './dashboard.html';
 import { Meteor } from 'meteor/meteor';
 import { UserStocks } from '../../api/UserStocks.js';
 import { Stocks } from '../../api/Stocks.js';
+import { UserHistory } from '../../api/UserHistory.js';
  
 class DashboardCtrl {
   constructor($scope) {
     $scope.viewModel(this);
+
+    this.subscribe('stocks');
+    this.subscribe('userStocks');
+    this.subscribe('userHistory');
 
     this.helpers({
       currentUser() {
@@ -20,16 +25,28 @@ class DashboardCtrl {
       },
       userStocks() {
         return UserStocks.find({});
+      },
+      userHistory() {
+        return UserHistory.find({});
       }
     })
   }
 
-  sellStock(name, value) { 
-    console.log("Selling stock now..." + name)
-
-    alert("Success! You have sold one " + name + "!");
+  buyStock(newTask) {
     // Insert a task into the collection
-    //Meteor.call('userStocks.insert', name, value, owner);
+    //Meteor.call('tasks.insert', newTask);
+ 
+    // Clear form
+    this.newTask = '';
+  }
+
+
+  sellStock(newTask) {
+    // Insert a task into the collection
+    //Meteor.call('tasks.insert', newTask);
+ 
+    // Clear form
+    this.newTask = '';
   }
 }
  

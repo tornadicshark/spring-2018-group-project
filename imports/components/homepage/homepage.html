@@ -6,7 +6,10 @@
                 <div class="col-md-6 col-12">
                     <h5>{{stock.name}}</h5> 
                     <p ng-show="{{$ctrl.currentUser === null}}" class="blockquote-footer"> LOGIN TO INVEST</p>
-                    <p ng-hide="{{$ctrl.currentUser === null}}" class="blockquote-footer"> 110 SHARES</p>
+                    <p ng-hide="{{$ctrl.currentUser === null}}" class="blockquote-footer"> 
+                        <!--{{$ctrl.userStocks(stock.name).amt}}-->
+                        Shares
+                    </p>
                 </div>
                 <div class="col-md-6 col-12 text-right">
                     <h6 class="btn btn-sm btn-success my-2">{{stock.close | currency:"$"}}</h6>
@@ -16,7 +19,6 @@
     </div>
 
     <div class="col-md-8">
-
        <currency-info></currency-info>
     </div>
 </div>

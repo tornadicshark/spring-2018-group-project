@@ -15,16 +15,18 @@
 
 
 /* ---- CURRENCY INFO ---- */
-#currencyInfoTbl  {
+#currencyInfoTbl, #historyInfoTbl {
   text-transform: uppercase;
   font-size: 90%;
 }
-#currencyInfoTbl tr {
+#currencyInfoTbl tr, #historyInfoTbl tr{
   border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
-#currencyInfoTbl th {
+#currencyInfoTbl th, #historyInfoTbl th  {
   color: rgba(0,0,0,.5);
 }
+
+#historyInfoTbl { width: 100%;}
 
 /* ---- BORDER ---- */
 hr { 

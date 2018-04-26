@@ -15,3 +15,10 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
 export const Stocks = new Mongo.Collection('stocks');
+
+if (Meteor.isServer) {
+    // This code only runs on the server
+    Meteor.publish('stocks', function getStocks() {
+      return Stocks.find({});
+    });
+  }

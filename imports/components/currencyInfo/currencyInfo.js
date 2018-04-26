@@ -20,7 +20,7 @@ class CurrencyCtrl {
           },
           userStocks() {
             //specify the type of coin an the user
-            return UserStocks.find({});
+            return UserStocks.find({ });
           }
         })
     }
