@@ -44,10 +44,26 @@ class StocksCtrl {
   buyStock(stock, amt, price, date) {
     console.log("Buying stock processing...");
     // add to the user's stock
-    Meteor.call('userStocks.buy', stock, amt);
+    Meteor.call('userStocks.buy', stock, amt, function(error, result) {
+      if(error){
+        console.log(error.reason);
+        return;
+      } 
+      console.log("UserID: " + Meteor.userId() + "\n Username: " + Meteor.user().username 
+        + "\n Message: Purchase of " + amt + " shares of " + stock + " was successful.");
+      alert("Purchase of " + amt + " shares of " + stock + " was successful.");
+    });
     // add to the history
     const type = "Buy";
-    Meteor.call('userHistory.add', stock, amt, price, date, type);
+    Meteor.call('userHistory.add', stock, amt, price, date, type, function(error, result) {
+      if(error){
+        console.log(error.reason);
+        alert("Something went wrong with adding this purchase to your history. Please contact our support.");
+        return;
+      } 
+      console.log("UserID: " + Meteor.userId() + "\n Username: " +Meteor.user().username
+       + "\n Message: purchase of " + amt + " shares of " + stock + " added to history.");
+    });
   }
 
 }

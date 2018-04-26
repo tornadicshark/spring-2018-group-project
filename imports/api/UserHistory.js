@@ -30,14 +30,20 @@ Meteor.methods({
         if (!Meteor.userId()) {
             throw new Meteor.Error('not-authorized');
         }
-
-        UserHistory.insert({
-            ownerID: Meteor.userId(),
-            transactionType: type,
-            stockType: stock,
-            amt: amt,
-            value: price,
-            date: new Date()
-        });
+        
+        try {
+            var newListing = UserHistory.insert({
+                ownerID: Meteor.userId(),
+                transactionType: type,
+                stockType: stock,
+                amt: amt,
+                value: price,
+                date: new Date()
+            });
+            return newListing;
+        } catch (Exception) {
+            throw new Meteor.Error('uncategorized');
+            return "Error";
+        }
     }
 });

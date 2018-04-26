@@ -35,7 +35,17 @@ class DashboardCtrl {
   sellStock(stock, amt) {
     console.log("Selling stock processing...");
     // add to the user's stock
-    Meteor.call('userStocks.sell', stock, amt);
+    Meteor.call('userStocks.sell', stock, amt,function(error, result) {
+      if(error){
+        console.log("UserID: " + Meteor.userId() + "\n Username: " 
+          + Meteor.user().username + "\n Message: " + error.reason);
+        alert("Something went wrong. Make sure that you are not attempting to sell more shares than you own...");
+        return;
+      } 
+      console.log("UserID: " + Meteor.userId() + "\n Username: " +Meteor.user().username + 
+        "\n Message: Successfully sold " + amt + " shares of " + stock + ".");
+      alert("Successfully sold " + amt + " shares of " + stock + ".");
+    });
 
     // add to the history
     const type = "Sell";
