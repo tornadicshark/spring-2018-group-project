@@ -1,0 +1,23 @@
+<span ng-show="{{$ctrl.currentUser === null}}">
+    Please login to see your history.
+</span> 
+
+<span ng-hide="{{$ctrl.currentUser === null}}"><h1> History for {{$ctrl.currentUser.username}}</h1>
+
+  <table id="historyInfoTbl">
+        <thead>
+          <th>Date</th>
+          <th>Transaction</th>
+          <th>Stock</th>
+          <th>Shares</th>
+          <th>Price</th>
+        </thead>
+        <tr ng-repeat="history in $ctrl.userHistory"> 
+          <td>{{history.date | date:'MM/dd/yyyy hh:mm a'}}</td>
+          <td>{{history.transactionType}}</td>
+          <td>{{history.stockType}}</td>
+          <td>{{history.amt}}</td>
+          <td>{{history.value}}</td>
+        </tr>
+    </table>    
+</span>

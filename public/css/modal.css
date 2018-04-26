@@ -1,0 +1,9 @@
+.fade.in {
+    opacity: 1;
+}
+
+.modal-backdrop.in {
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+
