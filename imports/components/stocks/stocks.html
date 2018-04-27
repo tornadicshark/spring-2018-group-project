@@ -1,20 +1,27 @@
 
 <h1>Welcome to Cryptodash</h1> 
 <h2> Today's Stock Prices and Trends </h2>
+
+<div ng-hide="{{$ctrl.currentUser === null}}">
+    <!-- initalize user's balance with the starting $25,000 if not already done 
+        <span ng-init="$ctrl.init()"></span>-->
+        <p>Balance: {{$ctrl.userBalance.balance | currency: "$":0}}</p>
+</div>
+
 <p> Note that these cards are presented in columns, therefore the #1, #2, and #3 are all in the left column.</p>
 <div class="card-columns" id="stocks">
   <div class="card" ng-repeat="stock in $ctrl.stocks">
       <div class="card-body">
         <h5 class="card-title">
             {{stock.name}} </h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{stock.close}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{stock.close | currency:"$"}}</h6>
         <!-- TODO: add d3 chart components 
         <img src="https://leanpub.com/site_images/D3-Tips-and-Tricks/straightgraph2.png" width="100%" alt="sample chart">
         -->
-      
+        
         <!-- Only show buy button if the user is logged in -->
               <button type="submit" class="btn btn-success btn-sm m-2" ng-hide="{{$ctrl.currentUser === null}}"
-              ng-click="$ctrl.buyStock(stock.name, 1, stock.close, stock.date)">
+              ng-click="$ctrl.buyStock(stock.name, 1, stock.close, stock.date, 1050, $ctrl.currentUser.username)">
                 <i class="far fa-credit-card" aria-hidden="true"></i> 
                 Buy 1 Share
               </button>
@@ -28,27 +35,27 @@
             <table id="currencyInfoTbl">
                 <tr>
                     <th>Open</th>
-                    <td>{{stock.open}}</td>
+                    <td>{{stock.open | currency:"$"}}</td>
                 </tr>
                 <tr>
                     <th>High</th>
-                    <td>{{stock.high}}</td>
+                    <td>{{stock.high | currency:"$"}}</td>
                 </tr>
                 <tr>
                     <th>Low</th>
-                    <td>{{stock.low}}</td>
+                    <td>{{stock.low | currency:"$"}}</td>
                 </tr>
                 <tr>
                     <th>Close</th>
-                    <td>{{stock.close}}</td>
+                    <td>{{stock.close | currency:"$"}}</td>
                 </tr>
                 <tr>
                     <th>Volume</th>
-                    <td>{{stock.volume}}</td>
+                    <td>$ {{stock.volume}}</td>
                 </tr>
                 <tr>
                     <th>Market Cap</th>
-                    <td>{{stock.marketCap}}</td>
+                    <td>$ {{stock.marketCap}}</td>
                 </tr>
             </table>      
           </div>

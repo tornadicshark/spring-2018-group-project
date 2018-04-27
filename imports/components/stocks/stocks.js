@@ -8,6 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { Stocks } from '../../api/Stocks.js';
 import { UserStocks } from '../../api/UserStocks.js';
 import { UserHistory } from '../../api/UserHistory.js';
+import { UserBalance } from '../../api/UserBalance.js';
 
 class StocksCtrl {
 
@@ -17,6 +18,7 @@ class StocksCtrl {
     this.subscribe('stocks');
     this.subscribe('userHistory');
     this.subscribe('userStocks');
+    this.subscribe('userBalance');
 
     // Return the data mostly right now
     this.helpers({
@@ -38,23 +40,54 @@ class StocksCtrl {
       userHistory() {
         return UserHistory.find({});
       },
+      userBalance() {
+        return UserBalance.findOne({});
+      }
     })
   }
 
-  buyStock(stock, amt, price, date) {
+
+  // INITALIZE USER BALANCE IF NOT ALREADY DONE
+  init() {
+    Meteor.call('userBalance.init', function(error, result) {
+      if(error){
+        console.log(error.reason);
+        return;
+      } 
+      console.log(result);
+    });
+  }
+
+  buyStock(stock, amt, price, date, balance, username) {
     console.log("Buying stock processing...");
-    // add to the user's stock
+    const type = "Buy";
+
+    // ADD TO UserStock
     Meteor.call('userStocks.buy', stock, amt, function(error, result) {
       if(error){
         console.log(error.reason);
         return;
       } 
+      // log to console
       console.log("UserID: " + Meteor.userId() + "\n Username: " + Meteor.user().username 
         + "\n Message: Purchase of " + amt + " shares of " + stock + " was successful.");
+
+      // alert the user
       alert("Purchase of " + amt + " shares of " + stock + " was successful.");
     });
-    // add to the history
-    const type = "Buy";
+
+    console.log("updating account balance...");
+    // UPDATE UserBalance
+    Meteor.call('userBalance.change', balance, price, amt, username, type, function(error, result){
+      if (error) { 
+        console.log(error.reason); 
+        return; 
+      }
+      // log to console the new balance
+      console.log(result);
+    });
+
+    // ADD TO UserHistory
     Meteor.call('userHistory.add', stock, amt, price, date, type, function(error, result) {
       if(error){
         console.log(error.reason);
@@ -64,6 +97,8 @@ class StocksCtrl {
       console.log("UserID: " + Meteor.userId() + "\n Username: " +Meteor.user().username
        + "\n Message: purchase of " + amt + " shares of " + stock + " added to history.");
     });
+    
+    console.log("Buying stock complete.");
   }
 
 }

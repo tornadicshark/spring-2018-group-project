@@ -3,6 +3,9 @@ Please login to see your dashboard.
 </span> 
 
 <span ng-hide="{{$ctrl.currentUser === null}}">
+    <span ng-init="$ctrl.init()"></span>
+  <h1> Dashboard</h1>
+  <p> Balance for {{$ctrl.currentUser.username}} is {{$ctrl.userBalance.balance | currency:"$"}}</p>
   <h2><i class="fas fa-chart-line" aria-hidden="true"></i> Earnings Tracker</h2>
   <p> It would be cool if we could show the users a chart of all their stocks and
      where they bought them at OR if we could show just an overall tracking of their "break even" line

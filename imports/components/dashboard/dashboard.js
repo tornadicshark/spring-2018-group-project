@@ -7,6 +7,7 @@ import { Meteor } from 'meteor/meteor';
 import { UserStocks } from '../../api/UserStocks.js';
 import { Stocks } from '../../api/Stocks.js';
 import { UserHistory } from '../../api/UserHistory.js';
+import { UserBalance } from '../../api/UserBalance.js';
  
 class DashboardCtrl {
   constructor($scope) {
@@ -15,6 +16,7 @@ class DashboardCtrl {
     this.subscribe('stocks');
     this.subscribe('userStocks');
     this.subscribe('userHistory');
+    this.subscribe('userBalance');
 
     this.helpers({
       currentUser() {
@@ -28,10 +30,25 @@ class DashboardCtrl {
       },
       userHistory() {
         return UserHistory.find({});
+      },
+      userBalance() {
+        return UserBalance.findOne({});
       }
     })
   }
 
+  // INITALIZE USER BALANCE IF NOT ALREADY DONE
+  init() {
+    Meteor.call('userBalance.init', function(error, result) {
+      if(error){
+        console.log(error.reason);
+        return;
+      } 
+      console.log(result);
+    });
+  }
+
+  // SELL STOCK
   sellStock(stock, amt) {
     console.log("Selling stock processing...");
     // add to the user's stock
