@@ -49,8 +49,26 @@ class DashboardCtrl {
   }
 
   // SELL STOCK
-  sellStock(stock, amt) {
+  sellStock(stock, amt, balance) {
     console.log("Selling stock processing...");
+
+    var type = "Sell";
+    var price = getPrice(stock);
+    var date = new Date();
+
+    // UPDATE UserBalance
+    console.log("updating account balance...");
+    Meteor.call('userBalance.change', balance, price, amt, type, function(error, result){
+      if (error) { 
+        console.log(error.message); 
+        alert(error.message);
+        return; 
+      }
+      // log to console the new balance
+      console.log(result);
+      //alert(result);
+    });
+
     // add to the user's stock
     Meteor.call('userStocks.sell', stock, amt,function(error, result) {
       if(error){
@@ -65,9 +83,6 @@ class DashboardCtrl {
     });
 
     // add to the history
-    const type = "Sell";
-    const price = getPrice(stock);
-    const date = new Date();
     Meteor.call('userHistory.add', stock, amt, price, date, type);
   }
 }
@@ -86,5 +101,6 @@ export default angular.module('DashboardApp', [
       name: { $eq: stockName }
     });
 
-    return stock.close;
+    console.log("Stock price: " + stock.close);
+    return Number(stock.close);
   }

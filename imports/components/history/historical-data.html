@@ -2,8 +2,18 @@
     Please login to see your history.
 </span> 
 
-<span ng-hide="{{$ctrl.currentUser === null}}"><h1> History for {{$ctrl.currentUser.username}}</h1>
-
+<span ng-hide="{{$ctrl.currentUser === null}}">
+<!-- start authenticated user content-->
+<div class="row">
+    <div class="col-md-8 col-12">
+      <h1>History for {{$ctrl.currentUser.username}}</h1> 
+    </div>
+    <div class="col-md-4 col-12">
+      <div class="alert alert-primary" role="alert">
+          <strong>Balance:</strong> {{$ctrl.userBalance.balance | currency: "$":2}}
+      </div>
+    </div>
+</div>
   <table id="historyInfoTbl">
         <thead>
           <th>Date</th>

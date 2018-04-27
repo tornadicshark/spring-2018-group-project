@@ -4,6 +4,7 @@ import template from './historical-data.html';
 
 import { Meteor } from 'meteor/meteor';
 import { UserHistory } from '../../api/UserHistory.js';
+import { UserBalance } from '../../api/UserBalance.js';
 
 class HistoryCtrl {
 
@@ -11,11 +12,15 @@ class HistoryCtrl {
     $scope.viewModel(this);
 
     this.subscribe('userHistory');
+    this.subscribe('userBalance');
 
     // Return the data mostly right now
     this.helpers({
       currentUser() {
         return Meteor.user();
+      },
+      userBalance() {
+        return UserBalance.findOne({});
       },
       userHistory() {
         const selector = {};

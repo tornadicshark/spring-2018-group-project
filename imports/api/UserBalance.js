@@ -43,31 +43,43 @@ Meteor.methods({
             return "User already initalized";
         }
     },
-    'userBalance.change' (balance, stockPrice, amt, username, type) {
+    'userBalance.change' (balance, stockPrice, amt, type) {
         // Make sure the user is logged in before adding
         if (!Meteor.userId()) {
             throw new Meteor.Error('not-authorized');
         }
-        
+
         // check the type 
 
-        // if type is add (selling stock)
+        // if type is Sell (selling stock)
+        if (type === "Sell") {
             // update and increase
+            var response = UserBalance.update(
+                { ownerID: { $eq: this.userId } },
+                { $setOnInsert: { ownerID: this.userId}, $inc: {balance: Number(stockPrice*amt)} }
+            );
+            return response;  
+        } 
+        // if type is Buy (buying stock)
+        else if (type === "Buy") {
 
-        // if type is subtract (buying stock)
-            // is the amount higher than the current balance? 
-                // return error message, do not let user buy stock
-                
             // calculate new account balance
-              // update and decrease
+            var newBalance = Number(balance) - Number(amt*stockPrice);
 
-               
-        var response = UserBalance.update(
-            { ownerID: { $eq: this.userId } },
-            { $setOnInsert: { ownerID: this.userId}, $set: {balance: balance} },
-            { upsert: true, returnNewDocument: true}
-          );
-
-          return response;  
+            // is the amount higher than the current balance? 
+            if ( newBalance < 0) {
+                // return error message, do not let user buy stock
+                throw new Meteor.Error("ERROR: Insufficent funds to complete transaction");
+            } else {
+            // update and decrease
+            var response = UserBalance.update(
+                { ownerID: { $eq: this.userId } },
+                { $setOnInsert: { ownerID: this.userId}, $set: {balance: newBalance} }
+            );
+            return response;
+            }  
+        } else {
+            return "Did not process correctly";
+        }
     }
 });

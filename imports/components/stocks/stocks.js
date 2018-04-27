@@ -9,6 +9,7 @@ import { Stocks } from '../../api/Stocks.js';
 import { UserStocks } from '../../api/UserStocks.js';
 import { UserHistory } from '../../api/UserHistory.js';
 import { UserBalance } from '../../api/UserBalance.js';
+import { isNull } from 'util';
 
 class StocksCtrl {
 
@@ -58,46 +59,52 @@ class StocksCtrl {
     });
   }
 
-  buyStock(stock, amt, price, date, balance, username) {
+  buyStock(stock, amt, price, date, balance) {
     console.log("Buying stock processing...");
     const type = "Buy";
 
-    // ADD TO UserStock
-    Meteor.call('userStocks.buy', stock, amt, function(error, result) {
-      if(error){
-        console.log(error.reason);
-        return;
-      } 
-      // log to console
-      console.log("UserID: " + Meteor.userId() + "\n Username: " + Meteor.user().username 
-        + "\n Message: Purchase of " + amt + " shares of " + stock + " was successful.");
-
-      // alert the user
-      alert("Purchase of " + amt + " shares of " + stock + " was successful.");
-    });
-
     console.log("updating account balance...");
     // UPDATE UserBalance
-    Meteor.call('userBalance.change', balance, price, amt, username, type, function(error, result){
+    Meteor.call('userBalance.change', balance, price, amt, type, function(error, result){
       if (error) { 
-        console.log(error.reason); 
+        console.log(error.message); 
+        alert(error.message);
         return; 
-      }
-      // log to console the new balance
-      console.log(result);
-    });
-
-    // ADD TO UserHistory
-    Meteor.call('userHistory.add', stock, amt, price, date, type, function(error, result) {
-      if(error){
-        console.log(error.reason);
-        alert("Something went wrong with adding this purchase to your history. Please contact our support.");
-        return;
       } 
-      console.log("UserID: " + Meteor.userId() + "\n Username: " +Meteor.user().username
-       + "\n Message: purchase of " + amt + " shares of " + stock + " added to history.");
+      
+      if (result==1) {
+        // log to console the new balance
+        console.log(result);
+        //alert(result);
+
+        // ADD TO UserStock
+        Meteor.call('userStocks.buy', stock, amt, function(error, result) {
+          if(error){
+            console.log(error.reason);
+            return;
+          } 
+          // log to console
+          console.log("UserID: " + Meteor.userId() + "\n Username: " + Meteor.user().username 
+            + "\n Message: Purchase of " + amt + " shares of " + stock + " was successful.");
+
+          // alert the user
+          alert("Purchase of " + amt + " shares of " + stock + " was successful.");
+        });
+
+        // ADD TO UserHistory
+        Meteor.call('userHistory.add', stock, amt, price, date, type, function(error, result) {
+          if(error){
+            console.log(error.reason);
+            alert("Something went wrong with adding this purchase to your history. Please contact our support.");
+            return;
+          } 
+          console.log("UserID: " + Meteor.userId() + "\n Username: " +Meteor.user().username
+          + "\n Message: purchase of " + amt + " shares of " + stock + " added to history.");
+        });
+
+      }
+
     });
-    
     console.log("Buying stock complete.");
   }
 
