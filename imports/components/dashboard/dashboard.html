@@ -3,54 +3,46 @@ Please login to see your dashboard.
 </span> 
 
 <span ng-hide="{{$ctrl.currentUser === null}}">
-  <h2><i class="fas fa-chart-line" aria-hidden="true"></i> Earnings Tracker</h2>
-  <p> It would be cool if we could show the users a chart of all their stocks and
-     where they bought them at OR if we could show just an overall tracking of their "break even" line
-     and then see where they either were doing good (green/profit) or were doing bad (red/losses).
+  <!-- initalize user balance if they are new -->
+  <span ng-init="$ctrl.init()"></span>
 
-     <em> Just an idea !</em>
-  </p>
-
-  <div class="card-columns" id="dashboard">
-      <div class="card" ng-repeat="stock in $ctrl.userStocks">
-          <div class="card-body">
-            <h5 class="card-title"> {{stock.stock}} </h5>
-            <em> Total Stock:  {{stock.amt}}</em>
-              <img src="http://wallstcheatsheet.com/wp-content/uploads/2013/05/D3.png" alt="sample chart" width="100%">
-            
-            
-            <!-- Only show buy button if the user is logged in -->
-                <button type="button" class="btn btn-danger" ng-hide="{{$ctrl.currentUser === null}}"
-                  ng-click="$ctrl.sellStock(stock.stock, 1)">
-                    <i class="far fa-credit-card" aria-hidden="true"></i> 
-                    Sell
-                  </button>
-
-            <!-- TODO --><!-- drop down more info 
-            <span>
-            <button type="button" class="btn btn-sm btn-dark" ng-click="row.booleanVal =row.booleanVal?false:true">
-              <i class="fas fa-angle-double-right" aria-hidden="true"></i>  
-             View History 
-             </button>
-              <div class="check-element animate-show my-2" ng-show="row.booleanVal">
-                <table id="historyInfoTbl">
-                    <thead>
-                      <th>Date</th>
-                      <th>Transaction</th>
-                      <th>Amount</th>
-                      <th>Price</th>
-                    </thead>
-                    <tr ng-repeat="{{history in userHistory | history.stockType == stock.stock}}"> 
-                      <td>{{history.date}}</td>
-                      <td>{{history.transactionType}}</td>
-                      <td>{{history.amt}}</td>
-                      <td>{{history.value}}</td>
-                    </tr>
-                </table>      
-              </div>
-          </span>-->
+  <!-- start authenticated user content-->
+  <div class="row">
+      <div class="col-md-8 col-12">
+        <h1>Dashboard</h1> 
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="alert alert-primary" role="alert">
+            <strong>Balance:</strong> {{$ctrl.userBalance.balance | currency: "$":2}}
         </div>
       </div>
+  </div>
+    
+  <div class="row col-12">
+    <h2><i class="fas fa-chart-line" aria-hidden="true"></i> Earnings Tracker</h2>
+    <p> It would be cool if we could show the users a chart of all their stocks and
+      where they bought them at OR if we could show just an overall tracking of their "break even" line
+      and then see where they either were doing good (green/profit) or were doing bad (red/losses).
+
+      <em> Just an idea !</em>
+    </p>
+
+    <div class="card-columns" id="dashboard">
+        <div class="card" ng-repeat="stock in $ctrl.userStocks">
+            <div class="card-body">
+              <h5 class="card-title"> {{stock.stock}} </h5>
+              <em> Total Stock:  {{stock.amt}}</em>
+                <img src="http://wallstcheatsheet.com/wp-content/uploads/2013/05/D3.png" alt="sample chart" width="100%">
+              
+              
+                  <button type="button" class="btn btn-danger m-2"
+                    ng-click="$ctrl.sellStock(stock.stock, 1, $ctrl.userBalance.balance)">
+                      <i class="far fa-credit-card" aria-hidden="true"></i> 
+                      Sell 1 Share
+                    </button>
+          </div>
+        </div>
+    </div>
   </div>
 </span>
   

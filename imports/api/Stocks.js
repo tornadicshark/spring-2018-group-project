@@ -21,4 +21,19 @@ if (Meteor.isServer) {
     Meteor.publish('stocks', function getStocks() {
       return Stocks.find({});
     });
+
+/*
+	var libs = [];
+	libs = JSON.parse(Assets.getText("libs.json"));
+    _.each(libs.libs, function (data) {
+  	   console.log(libs);
+       Libs.insert(data);
+       _.each(libs.dependencies, function(deps) {
+    	Libs.dependencies.insert(deps);
+    });
+  });*/
   }
+
+  //does not work
+  //mongoimport -h localhost --port 3001 --d meteor --collection stocks --type json --file /Users/kassandrawalker/Documents/Meteor/isdi-sp18-group-project/public/data/todaysData.json --jsonArray	
+  

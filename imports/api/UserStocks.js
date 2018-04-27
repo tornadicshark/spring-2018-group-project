@@ -33,11 +33,13 @@ Meteor.methods({
 
     // if currently exists, increase the amount by the amount purchased
     // if it does not exit, the upsert true will create/insert
-    UserStocks.update(
+    const newID = UserStocks.update(
       { ownerID: { $eq: this.userId }, stock: { $eq: stock } },
       { $setOnInsert: { ownerID: this.userId, stock: stock}, $inc: {amt: amount} },
       { upsert: true, returnNewDocument: true}
     );
+
+    return newID;
   },
   'userStocks.sell' (stock, amount) {
     // Make sure the user is logged in before inserting a task
@@ -54,19 +56,24 @@ Meteor.methods({
     
     var newAmount = (Number(oldAmount) - Number(amount));
 
+    try {
     if (newAmount > 0) {
-      UserStocks.update(
-        { ownerID: { $eq: this.userId }, stock: { $eq: stock } },
-        { $setOnInsert: { ownerID: this.userId, stock: stock}, $set: {amt: newAmount} },
-        { upsert: true, returnNewDocument: true}
-      );
-    } else if (newAmount >= 0) {
-      UserStocks.remove(
-        { ownerID: { $eq: this.userId }, stock: { $eq: stock } }
-      );
-    } else {
-      throw new Meteor.Error('not-enough-stock');
+        UserStocks.update(
+          { ownerID: { $eq: this.userId }, stock: { $eq: stock } },
+          { $setOnInsert: { ownerID: this.userId, stock: stock}, $set: {amt: newAmount} },
+          { upsert: true, returnNewDocument: true},
+        );
+        return "Success";
+      } else if (newAmount >= 0) {
+        UserStocks.remove(
+          { ownerID: { $eq: this.userId }, stock: { $eq: stock } }
+        );
+        return "Success";
+      } else {
+        return "Error. Could not sell your stock. Make sure you are not selling more than you actual own.";
+      }
+    } catch (Exception) {
+      throw new Meteor.Error('unsuccessful');
     }
-
   },
 });
