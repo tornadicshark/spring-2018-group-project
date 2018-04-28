@@ -59,8 +59,9 @@ class StocksCtrl {
     });
   }
 
-  buyStock(stock, amt, price, date, balance) {
+ buyStock(stock, amt, price, date, balance) {
     console.log("Buying stock processing...");
+    
     const type = "Buy";
 
     console.log("updating account balance...");

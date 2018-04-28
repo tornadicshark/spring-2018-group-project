@@ -33,13 +33,22 @@
             <img src="https://leanpub.com/site_images/D3-Tips-and-Tricks/straightgraph2.png" width="100%" alt="sample chart">
             -->
             
-            <!-- Only show buy button if the user is logged in -->
-                <button type="submit" class="btn btn-success btn-sm m-2" ng-hide="{{$ctrl.currentUser === null}}"
-                ng-click="$ctrl.buyStock(stock.name, 1, stock.close, stock.date, $ctrl.userBalance.balance)">
-                    <i class="far fa-credit-card" aria-hidden="true"></i> 
-                    Buy 1 Share
+            <!-- Only show buy section if the user is logged in -->
+            <span ng-hide="{{$ctrl.currentUser === null}}">
+                <button class="btn btn-dark btn-sm m-2"
+                ng-click="buy.booleanVal =buy.booleanVal?false:true">
+                   <i class="far fa-credit-card" aria-hidden="true"></i> 
+                    Buy
                 </button>
-                
+
+                <div class="check-element animate-show my-2" ng-show="buy.booleanVal">
+                    <form ng-submit="$ctrl.buyStock(stock.name, $ctrl.amount, stock.close, stock.date, $ctrl.userBalance.balance)">
+                        <label>How many shares?</label> 
+                        <input type="number" ng-model="$ctrl.amount"/>
+                        <input type="submit" class="btn btn-success btn-sm m-2" value="Buy Shares" />
+                    </form>    
+                </div>
+            </span>
             <!-- drop down more info -->
             <span>
             <button type="button" class="btn btn-sm btn-dark m-2" ng-click="row.booleanVal =row.booleanVal?false:true">
