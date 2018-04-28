@@ -32,24 +32,19 @@ Please login to see your dashboard.
             <div class="card-body">
               <h5 class="card-title"> {{stock.stock}} </h5>
               <em> Total Stock:  {{stock.amt}}</em>
-                <img src="http://wallstcheatsheet.com/wp-content/uploads/2013/05/D3.png" alt="sample chart" width="100%">
+              <img src="http://wallstcheatsheet.com/wp-content/uploads/2013/05/D3.png" alt="sample chart" width="100%">
               
-          
-            <span>
-              <button class="btn btn-dark btn-sm m-2"
-              ng-click="sell.booleanVal =sell.booleanVal?false:true">
-                 <i class="far fa-credit-card" aria-hidden="true"></i> 
-                  Sell
-              </button>
+              <form class="bg-light border p-2" 
+              ng-submit="$ctrl.sellStock(stock.stock, $ctrl.amount, $ctrl.userBalance.balance)">
 
-              <div class="check-element animate-show my-2" ng-show="sell.booleanVal">
-                  <form ng-submit="$ctrl.sellStock(stock.stock, $ctrl.amount, $ctrl.userBalance.balance)">
-                      <label>How many shares?</label> 
-                      <input type="number" ng-model="$ctrl.amount"/>
-                      <input type="submit" class="btn btn-danger btn-sm m-2" value="Sell Shares" />
-                  </form>    
+              <div class="row">
+                  <div class="col-md-6">
+                      <input type="number" ng-model="$ctrl.amount" placeholder="# Shares"/>
+                  </div> <div class="col-md-6">
+                      <input type="submit" class="btn btn-danger btn-sm" value="Sell Shares" />
+                  </div>
               </div>
-          </span>
+              </form>   
               <!--
                   <button type="button" class="btn btn-danger m-2"
                     ng-click="$ctrl.sellStock(stock.stock, 1, $ctrl.userBalance.balance)">
