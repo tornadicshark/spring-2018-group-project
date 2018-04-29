@@ -9,6 +9,7 @@ import '../imports/startup/accounts-config.js'; // user account import
 import sidebarApp from '../imports/components/sidebar/sidebar';
 import faqApp from '../imports/components/faq/faq';
 import stocksApp from '../imports/components/stocks/stocks';
+import chartApp from '../imports/components/charts/chart';
 
 // AUTHENTICATED USER TOOLS
 import { Meteor } from 'meteor/meteor';
@@ -26,6 +27,7 @@ var app = angular.module('cryptodash', [
   sidebarApp.name,
   faqApp.name,
   stocksApp.name,
+  chartApp.name,
 
   // AUTHENTICATED USER IMPORTS
   dashboardApp.name,
@@ -43,6 +45,9 @@ app.config(function($routeProvider) {
   })
   .when("/history", {
     template: `<historical-app></historical-app>`
+  })
+  .when("/charts", {
+    templateUrl: 'imports/components/charts/chart.html'
   })
   .when("/stocks", {
     template: `<stocks-app></stocks-app>`

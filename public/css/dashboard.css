@@ -85,7 +85,7 @@ column-count: 2;
 }
 
 input[type="number"] { max-width: 100%;}
-.card-body { min-height: 350px; }
+/*.card-body { min-height: 350px; }*/
 
 /* support for dashboard component */
 #dashboard {
