@@ -6,7 +6,7 @@ export default angular.module('chartApp', [angularMeteor])
 .directive('lineChart', [function() {
     function link(scope, element) {
         var width = 900;
-        var height = 500;
+        var height = 400;
 
         // Use the extracted size to set the size of an SVG element.
         d3.select(element[0]).append('svg').attr("width", width).attr("height", height);
@@ -86,7 +86,7 @@ export default angular.module('chartApp', [angularMeteor])
                 .attr("y", 6)
                 .attr("dy", "0.71em")
                 .attr("text-anchor", "end")
-                .text("close ($)");
+                .text("USD ($)");
             
             /*g.append("path")
                 .datum(data)
