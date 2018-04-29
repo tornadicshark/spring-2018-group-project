@@ -8,6 +8,9 @@ import { UserStocks } from '../../api/UserStocks.js';
 import { Stocks } from '../../api/Stocks.js';
 import { UserHistory } from '../../api/UserHistory.js';
 import { UserBalance } from '../../api/UserBalance.js';
+
+// d3
+//import chartApp from '../imports/components/charts/chart';
  
 class DashboardCtrl {
   constructor($scope) {

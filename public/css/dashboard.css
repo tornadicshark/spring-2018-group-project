@@ -81,7 +81,7 @@ padding-top: 60px; /* Space for fixed navbar */
 
 /* support for stocks component */
 #stocks  {
-column-count: 2;
+column-count: 3;
 }
 
 input[type="number"] { max-width: 100%;}
@@ -89,7 +89,7 @@ input[type="number"] { max-width: 100%;}
 
 /* support for dashboard component */
 #dashboard {
-column-count: 2;
+column-count: 3;
 }
 
 /* nav not working for some reason... */

@@ -17,42 +17,40 @@ Please login to see your dashboard.
         </div>
       </div>
   </div>
-    
-  <div class="row col-12">
-    <h2><i class="fas fa-chart-line" aria-hidden="true"></i> Earnings Tracker</h2>
-    <p> It would be cool if we could show the users a chart of all their stocks and
-      where they bought them at OR if we could show just an overall tracking of their "break even" line
-      and then see where they either were doing good (green/profit) or were doing bad (red/losses).
 
-      <em> Just an idea !</em>
-    </p>
-
-    <div class="card-columns" id="dashboard">
+  <!-- specific info-->
+  <div class="row">
+    <div class="col-md-12 col-12" ng-app="chartApp">
+      <h2><i class="fas fa-chart-line" aria-hidden="true"></i> Price Tracker</h2>
+        <line-chart></line-chart>
+    </div>
+    <div class="col-md-12 col-12">
+      <h2><i class="fas fa-chart-line" aria-hidden="true"></i> Your Stocks</h2>
+      
+      <div class="card-columns" id="dashboard">
         <div class="card" ng-repeat="stock in $ctrl.userStocks">
-            <div class="card-body">
-              <h5 class="card-title"> {{stock.stock}} </h5>
-              <em> Total Stock:  {{stock.amt}}</em>
-              <img src="http://wallstcheatsheet.com/wp-content/uploads/2013/05/D3.png" alt="sample chart" width="100%">
-              
-              <form class="bg-light border p-2" 
-              ng-submit="$ctrl.sellStock(stock.stock, $ctrl.amount, $ctrl.userBalance.balance)">
-
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <h5 class="card-title"> {{stock.stock}} </h5>
+              </div>
+              <div class="col-md-6 col-12 text-right">
+                <em> Shares:  {{stock.amt}}</em>
+              </div>
+            </div>
+            <form class="bg-light border p-2" 
+            ng-submit="$ctrl.sellStock(stock.stock, $ctrl.amount, $ctrl.userBalance.balance)">
               <div class="row">
                   <div class="col-md-6">
                       <input type="number" ng-model="$ctrl.amount" placeholder="# Shares"/>
-                  </div> <div class="col-md-6">
+                  </div> <div class="col-md-6 text-center">
                       <input type="submit" class="btn btn-danger btn-sm" value="Sell Shares" />
                   </div>
               </div>
-              </form>   
-              <!--
-                  <button type="button" class="btn btn-danger m-2"
-                    ng-click="$ctrl.sellStock(stock.stock, 1, $ctrl.userBalance.balance)">
-                      <i class="far fa-credit-card" aria-hidden="true"></i> 
-                      Sell 1 Share
-                    </button>-->
+            </form>   
           </div>
         </div>
+      </div>
     </div>
   </div>
 </span>
