@@ -5,15 +5,15 @@ import template from './chart.html';
 export default angular.module('chartApp', [angularMeteor])
 .directive('lineChart', [function() {
     function link(scope, element) {
-        var width = 800;
-        var height = 400;
+        var width = 900;
+        var height = 500;
 
         // Use the extracted size to set the size of an SVG element.
         d3.select(element[0]).append('svg').attr("width", width).attr("height", height);
 
         var svg = d3.select("svg"),
-        margin = {top: 20, right: 20, bottom: 120, left: 20},
-        margin2 = {top: 310, right: 20, bottom: 60, left: 20},
+        margin = {top: 20, right: 20, bottom: 120, left: 40},
+        margin2 = {top: 410, right: 20, bottom: 60, left: 40},
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom,
         height2 = +svg.attr("height") - margin2.top - margin2.bottom;

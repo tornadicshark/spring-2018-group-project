@@ -3,6 +3,19 @@
 <head>
 	<title>Amazon Lex for JavaScript - Sample Application (QnABot_QnABot_AoneeightENRfive)</title>
 	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.41.0.min.js"></script>
+	<link rel="stylesheet" href="css/fontawesome-all.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/dashboard.css">  
+	<link rel="stylesheet" href="css/lex.css">
+
+    <meta name="author" content="lafranch">
+    <meta name="description" content="Lex Runtime example from the browser.">
+    <meta name="keywords" content="Amazon Lex, SDK, Runtime, Browser, JavaScript">
+	
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.48.0.min.js"></script>
+	<script src="js/aws-lex-audio.min.js" type="text/javascript"></script>
+	<script src="js/renderer.js" type="text/javascript"></script>
+		
 	<style language="text/css">
 		input#wisdom {
 			padding: 4px;
@@ -45,17 +58,82 @@
 		}
 	</style>
 </head>
+
 <body>
-	<h1 style="text-align:  left">Amazon Lex - Project Bot</h1>
-	<p style="width: 400px">
-		This little chatbot shows how easy it is to incorporate
-		<a href="https://aws.amazon.com/lex/" title="Amazon Lex (product)" target="_new">Amazon Lex</a> into your web pages.  Try it out.
-	</p>
-	<div id="conversation" style="width: 400px; height: 400px; border: 1px solid #ccc; background-color: #eee; padding: 4px; overflow: scroll"></div>
-	<form id="chatform" style="margin-top: 10px" onsubmit="return pushChat();">
-		<input type="text" id="wisdom" size="80" value="" placeholder="I want to buy Bitcoin">
-	</form>
+<nav class="navbar navbar-light fixed-top flex-md-nowrap bg-light p-0 shadow">
+<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">
+	<img src="images/logo.png" height="30" class="d-inline-block align-top" alt="Crypto dash">
+	<!--Cryptodash-->
+</a>
+</nav>
+	  
+<div class="container-fluid">
+<div class="row">
+	<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+		<div class="sidebar-sticky">
+			<ul class="nav flex-column">
+				<li class="nav-item">
+					<a class="nav-link" href="/">
+					  <i class="fas fa-home" aria-hidden="true"></i>
+					  Return to App
+					</a>
+				  </li>
+			</ul>
+		</div>
+	</nav>
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
+				  <!-- routing area -->
+				  <div class="row">
+						<div class="col-12">
+							<h1> Help </h1>
+					
+							<div class="row my-2">
+								<div class="col-md-6 col-12 wrapper">
+									<h2>Chat with Lex</h2> 
+										
+									<div class="audio-control">
+										<p id="audio-control" class="white-circle">
+											<img src="images/lex.png">
+											<canvas class="visualizer"></canvas>
+										</p>
+										<p><span id="message"></span></p>
+									</div>
+
+									<h3>You can ask...</h3>
+									<blockquote class="blockquote">
+											<p class="mb-0">What is cryptodash?</p>
+											<p class="mb-0">What is a crypto currency?</p>
+											<p class="mb-0">How do I buy currency?</p>
+											<p class="mb-0">How do I sell currency?</p>
+											<p class="mb-0">Why do I get $25,000 for signing up?</p>
+									</blockquote>
+								</div>
+								<div class="col-md-6 col-12">
+										<h3>Live Chat</h3>	
+									<div id="conversation" style="width: 400px; height: 400px; border: 1px solid #ccc; background-color: #eee; padding: 4px; overflow: scroll"></div>
+									<form id="chatform" style="margin-top: 10px" onsubmit="return pushChat();">
+										<input type="text" id="wisdom" size="80" value="" placeholder="I want to buy Bitcoin">
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row my-2">
+						<div class="col-12">
+							<h2> 
+								Additional Resources
+							</h2>
+							<h3>What is cryptocurrency?</h3> 
+							<iframe width="500" height="315" src="https://www.youtube.com/embed/HLYuxoytR3s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+						</div>
+					</div>
+</main>
+</div>
+</div>
+</body>
+		
 	<script type="text/javascript">
+	/*
 		// set the focus to the input box
 		document.getElementById("wisdom").focus();
 		// Initialize the Amazon Cognito credentials provider
@@ -138,6 +216,58 @@
 			conversationDiv.appendChild(responsePara);
 			conversationDiv.scrollTop = conversationDiv.scrollHeight;
 		}
-	</script>
-</body>
-</html>
+*/
+</script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.48.0.min.js"></script>
+<script src="js/aws-lex-audio.min.js" type="text/javascript"></script>
+<script src="js/renderer.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var waveform = window.Waveform();
+    var message = document.getElementById('message');
+    var config, conversation;
+    message.textContent = 'Passive';
+
+    document.getElementById('audio-control').onclick = function () {
+		
+        //AWS.config.credentials = new AWS.Credentials(document.getElementById('ACCESS_ID').value, document.getElementById('SECRET_KEY').value, null);
+		// Initialize the Amazon Cognito credentials provider
+		AWS.config.region = 'us-east-1'; // Region
+		AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+			IdentityPoolId: 'us-east-1:1c4c331e-6318-4fe3-9322-90bf0db1c53f',
+		});
+   
+		// taken from the other inclass example
+        config = {
+            //lexConfig: { botName: document.getElementById('BOT').value }
+			lexConfig: { 
+					botAlias: '$LATEST',
+					botName: 'QnABot_QnABot_AoneeightENRfive'
+			}
+        };
+		/*
+        AWS.config.credentials = new AWS.Credentials(document.getElementById('ACCESS_ID').value, document.getElementById('SECRET_KEY').value, null);
+        AWS.config.region = 'us-east-1';
+        
+        config = {
+            lexConfig: { botName: document.getElementById('BOT').value }
+        };*/
+
+        conversation = new LexAudio.conversation(config, function (state) {
+            message.textContent = state + '...';
+            if (state === 'Listening') {
+                waveform.prepCanvas();
+            }
+            if (state === 'Sending') {
+                waveform.clearCanvas();
+            }
+        }, function (data) {
+            console.log('Transcript: ', data.inputTranscript, ", Response: ", data.message);
+        }, function (error) {
+            message.textContent = error;
+        }, function (timeDomain, bufferLength) {
+            waveform.visualizeAudioBuffer(timeDomain, bufferLength);
+        });
+        conversation.advanceConversation();
+    };
+
+</script>
