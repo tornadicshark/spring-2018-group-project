@@ -90,7 +90,7 @@
 							<div class="row my-2">
 								<div class="col-md-6 col-12 wrapper">
 									<h2>Chat with Lex</h2> 
-										
+										<p>Click on the blue icon <b>once</b> to ask a question and start a conversation.</p>
 									<div class="audio-control">
 										<p id="audio-control" class="white-circle">
 											<img src="images/lex.png">
@@ -225,7 +225,7 @@
     var waveform = window.Waveform();
     var message = document.getElementById('message');
     var config, conversation;
-    message.textContent = 'Click the icon above ONE time to start talking';
+    message.textContent = 'Not Listening...';
 
     document.getElementById('audio-control').onclick = function () {
 		
@@ -244,13 +244,6 @@
 					botName: 'QnABot_QnABot_AoneeightENRfive'
 			}
         };
-		/*
-        AWS.config.credentials = new AWS.Credentials(document.getElementById('ACCESS_ID').value, document.getElementById('SECRET_KEY').value, null);
-        AWS.config.region = 'us-east-1';
-        
-        config = {
-            lexConfig: { botName: document.getElementById('BOT').value }
-        };*/
 
         conversation = new LexAudio.conversation(config, function (state) {
             message.textContent = state + '...';
