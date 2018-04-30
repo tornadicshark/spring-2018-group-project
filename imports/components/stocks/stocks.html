@@ -24,61 +24,73 @@
     <p> Note that these cards are presented in columns, therefore the #1, #2, and #3 are all in the left column.</p>        
 
     <div class="card-columns" id="stocks">
-    <div class="card" ng-repeat="stock in $ctrl.stocks">
-        <div class="card-body">
-            <h5 class="card-title">
-                {{stock.name}} </h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{stock.close | currency:"$":2}}</h6>
-            <!-- TODO: add d3 chart components 
-            <img src="https://leanpub.com/site_images/D3-Tips-and-Tricks/straightgraph2.png" width="100%" alt="sample chart">
-            -->
-            
-            <!-- Only show buy button if the user is logged in -->
-                <button type="submit" class="btn btn-success btn-sm m-2" ng-hide="{{$ctrl.currentUser === null}}"
-                ng-click="$ctrl.buyStock(stock.name, 1, stock.close, stock.date, $ctrl.userBalance.balance)">
-                    <i class="far fa-credit-card" aria-hidden="true"></i> 
-                    Buy 1 Share
-                </button>
-                
-            <!-- drop down more info -->
-            <span>
-            <button type="button" class="btn btn-sm btn-dark m-2" ng-click="row.booleanVal =row.booleanVal?false:true">
-            <i class="fas fa-angle-double-right" aria-hidden="true"></i>  
-            More Info</button>
-            <div class="check-element animate-show my-2" ng-show="row.booleanVal">
-                <table id="currencyInfoTbl">
-                    <tr>
-                        <th>Open</th>
-                        <td>{{stock.open | currency:"$":2}}</td>
-                    </tr>
-                    <tr>
-                        <th>High</th>
-                        <td>{{stock.high | currency:"$":2}}</td>
-                    </tr>
-                    <tr>
-                        <th>Low</th>
-                        <td>{{stock.low | currency:"$":2}}</td>
-                    </tr>
-                    <tr>
-                        <th>Close</th>
-                        <td>{{stock.close | currency:"$":2}}</td>
-                    </tr>
-                    <tr>
-                        <th>Volume</th>
-                        <td> {{stock.volume | number:0}}</td>
-                    </tr>
-                    <tr>
-                        <th>Market Cap</th>
-                        <td>{{stock.marketCap | currency:"$":2}}</td>
-                    </tr>
-                </table>      
-            </div>
-        </span>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated on {{stock.date | date:'MM/dd/yyyy'}}</small>
-        </div>
-    </div>
-    </div>
 
+        <!-- for each stock-->
+        <div class="card" ng-repeat="stock in $ctrl.stocks">
+            <div class="card-body">
+                <!-- name and amount-->
+                <h5 class="card-title">
+                    {{stock.name}} </h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{stock.close | currency:"$":2}}</h6>
+    
+
+                <!-- Only show buy section if the user is logged in -->
+                    <!-- buy form-->
+                <form name="buy" class="bg-light border p-2" ng-hide="{{$ctrl.currentUser === null}}"
+                ng-submit="$ctrl.buyStock(stock.name, $ctrl.amount, stock.close, stock.date, $ctrl.userBalance.balance)">
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="number" ng-model="$ctrl.amount" placeholder="# Shares"/>
+                        </div> <div class="col-md-6 text-center">
+                            <input type="submit" class="btn btn-success btn-sm" value="Buy Shares" />
+                        </div>
+                    </div>
+                </form>    
+
+                <!-- TODO: add d3 chart components 
+                    <img src="https://leanpub.com/site_images/D3-Tips-and-Tricks/straightgraph2.png" width="100%" alt="sample chart">
+                    -->
+
+                <!-- drop down more info -->
+                <span>
+                    <button type="button" class="btn btn-sm btn-dark m-2" ng-click="row.booleanVal =row.booleanVal?false:true">
+                        <i class="fas fa-angle-double-right" aria-hidden="true"></i>  
+                        More Info
+                    </button>
+                    <div class="check-element animate-show my-2" ng-show="row.booleanVal">
+                        <table id="currencyInfoTbl">
+                            <tr>
+                                <th>Open</th>
+                                <td>{{stock.open | currency:"$":2}}</td>
+                            </tr>
+                            <tr>
+                                <th>High</th>
+                                <td>{{stock.high | currency:"$":2}}</td>
+                            </tr>
+                            <tr>
+                                <th>Low</th>
+                                <td>{{stock.low | currency:"$":2}}</td>
+                            </tr>
+                            <tr>
+                                <th>Close</th>
+                                <td>{{stock.close | currency:"$":2}}</td>
+                            </tr>
+                            <tr>
+                                <th>Volume</th>
+                                <td> {{stock.volume | number:0}}</td>
+                            </tr>
+                            <tr>
+                                <th>Market Cap</th>
+                                <td>{{stock.marketCap | currency:"$":2}}</td>
+                            </tr>
+                        </table>      
+                    </div>
+                </span>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated on {{stock.date | date:'MM/dd/yyyy'}}</small>
+            </div>
+        </div>
+    </div>
 </div>

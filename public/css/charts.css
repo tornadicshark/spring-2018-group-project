@@ -1,0 +1,47 @@
+#lineChart, #donutChart {
+    width: 100%;
+    height: 500px;
+}
+line-chart, donut-chart  {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#legend ul { list-style: none; margin: 0; padding: 0;}
+#legend li { display: block; padding-left: 0; margin: 2px;}
+
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke:rgba(0,0,0,.5);
+  /*shape-rendering: crispEdges;*/
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line1, .line2, .line3, .line4, .line5 {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+  fill: none;
+  stroke: steelblue;
+}
+
+
+.zoom {
+  cursor: move;
+  fill: none;
+  pointer-events: all;
+}

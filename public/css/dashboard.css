@@ -84,9 +84,12 @@ padding-top: 60px; /* Space for fixed navbar */
 column-count: 3;
 }
 
+input[type="number"] { max-width: 100%;}
+/*.card-body { min-height: 350px; }*/
+
 /* support for dashboard component */
 #dashboard {
-column-count: 2;
+column-count: 3;
 }
 
 /* nav not working for some reason... */
