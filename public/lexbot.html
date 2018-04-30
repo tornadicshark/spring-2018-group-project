@@ -98,6 +98,8 @@
 										</p>
 										<p><span id="message"></span></p>
 									</div>
+								</div>
+								<div class="col-md-6 col-12">
 
 									<h3>You can ask...</h3>
 									<blockquote class="blockquote">
@@ -107,13 +109,11 @@
 											<p class="mb-0">How do I sell currency?</p>
 											<p class="mb-0">Why do I get $25,000 for signing up?</p>
 									</blockquote>
-								</div>
-								<div class="col-md-6 col-12">
-										<h3>Live Chat</h3>	
+									<!--	<h3>Live Chat</h3>	
 									<div id="conversation" style="width: 400px; height: 400px; border: 1px solid #ccc; background-color: #eee; padding: 4px; overflow: scroll"></div>
 									<form id="chatform" style="margin-top: 10px" onsubmit="return pushChat();">
 										<input type="text" id="wisdom" size="80" value="" placeholder="I want to buy Bitcoin">
-									</form>
+									</form>-->
 								</div>
 							</div>
 						</div>
@@ -225,7 +225,7 @@
     var waveform = window.Waveform();
     var message = document.getElementById('message');
     var config, conversation;
-    message.textContent = 'Passive';
+    message.textContent = 'Click the icon above ONE time to start talking';
 
     document.getElementById('audio-control').onclick = function () {
 		
