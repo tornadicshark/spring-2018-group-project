@@ -21,33 +21,28 @@ Please login to see your dashboard.
   <!-- my stocks-->
   <div class="row">
     <div class="col-md-12 col-12">
-      <h2><i class="fas fa-chart-line" aria-hidden="true"></i> Your Stocks</h2>
+      <h2><i class="fas fa-chart-line" aria-hidden="true"></i> Your Cryptocurrencies</h2>
       
       <div class="card-columns" id="dashboard">
         <div class="card" ng-repeat="stock in $ctrl.userStocks">
           <div class="card-body">
+            <h5 class="card-title"> {{stock.stock}} </h5>
+            <em> You Own {{stock.amt}} {{stock.stock}}</em>
+
+          <form class="bg-light border p-2" 
+          ng-submit="$ctrl.sellStock(stock.stock, $ctrl.amount, $ctrl.userBalance.balance)">
             <div class="row">
-              <div class="col-md-6 col-12">
-                <h5 class="card-title"> {{stock.stock}} </h5>
-              </div>
-              <div class="col-md-6 col-12 text-right">
-                <em> Shares:  {{stock.amt}}</em>
-              </div>
+                <div class="col-md-6">
+                    <input type="number" ng-model="$ctrl.amount" placeholder="# {{stock.stock}}"/>
+                </div> <div class="col-md-6 text-center">
+                    <input type="submit" class="btn btn-danger btn-sm" value="Sell {{stock.stock}}" />
+                </div>
             </div>
-            <form class="bg-light border p-2" 
-            ng-submit="$ctrl.sellStock(stock.stock, $ctrl.amount, $ctrl.userBalance.balance)">
-              <div class="row">
-                  <div class="col-md-6">
-                      <input type="number" ng-model="$ctrl.amount" placeholder="# Shares"/>
-                  </div> <div class="col-md-6 text-center">
-                      <input type="submit" class="btn btn-danger btn-sm" value="Sell Shares" />
-                  </div>
-              </div>
-            </form>   
-          </div>
+          </form>   
         </div>
+       </div>
       </div>
-    </div>
+     </div>
   </div>
 
   <!-- specific info-->

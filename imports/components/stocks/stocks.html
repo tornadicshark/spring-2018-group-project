@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-8 col-12">
         <h1>Welcome to Cryptodash</h1> 
-        <h2> Today's Stock Prices and Trends </h2>
+        <h2> Today's Cryptocurrency Prices </h2>
     </div>
     <div class="col-md-4 col-12">
         <div ng-hide="{{$ctrl.currentUser === null}}">
@@ -21,7 +21,7 @@
 </div>
 
 <div class="row col-12">
-    <p> Note that these cards are presented in columns, therefore the #1, #2, and #3 are all in the left column.</p>        
+    <p> View more information below about the cryptocurrencies. Register to invest and get your complimentary $25,000!</p>        
 
     <div class="card-columns" id="stocks">
 
@@ -41,9 +41,9 @@
                     
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="number" ng-model="$ctrl.amount" placeholder="# Shares"/>
+                            <input type="number" ng-model="$ctrl.amount" placeholder="# of {{stock.name}}"/>
                         </div> <div class="col-md-6 text-center">
-                            <input type="submit" class="btn btn-success btn-sm" value="Buy Shares" />
+                            <input type="submit" class="btn btn-success btn-sm" value="Buy {{stock.name}}" />
                         </div>
                     </div>
                 </form>    
